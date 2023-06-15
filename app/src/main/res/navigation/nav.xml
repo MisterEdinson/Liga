@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/tvLogoText">
+
+    <fragment
+        android:id="@+id/tvLogoText"
+        android:name="com.example.liga.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_ligsFragment"
+            app:destination="@id/ligsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_cupsFragment"
+            app:destination="@id/cupsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ligsFragment"
+        android:name="com.example.liga.ui.ligs.LigsFragment"
+        android:label="fragment_ligs"
+        tools:layout="@layout/fragment_ligs" >
+        <action
+            android:id="@+id/action_ligsFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamFragment"
+        android:name="com.example.liga.ui.team.TeamFragment"
+        android:label="fragment_team"
+        tools:layout="@layout/fragment_team" />
+    <fragment
+        android:id="@+id/cupsFragment"
+        android:name="com.example.liga.ui.cups.CupsFragment"
+        android:label="fragment_cups"
+        tools:layout="@layout/fragment_cups" >
+        <action
+            android:id="@+id/action_cupsFragment_to_teamFragment"
+            app:destination="@id/teamFragment" />
+    </fragment>
+</navigation>
