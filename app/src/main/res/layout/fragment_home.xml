@@ -89,22 +89,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+    <fragment
+        android:name="com.example.liga.ui.home.homeMatches.TodayMatchesFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:padding="5dp"
-        android:text="Today matches"
-        android:textSize="16dp"
-        android:background="#391A83EA"
-        android:fontFamily="@font/bernard"
-        android:textColor="@color/white"
+        android:layout_marginBottom="16dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:navGraph="@navigation/nav_home" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
