@@ -9,10 +9,10 @@
     tools:context=".ui.home.HomeFragment">
 
     <TextView
-        android:id="@+id/tvLogoText"
+        android:id="@+id/homeFragmentHab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="FOOTBALL"
+        android:text="@string/logo_header"
         android:textColor="@color/white"
         android:textSize="24sp"
         android:fontFamily="@font/bernard"
@@ -29,7 +29,8 @@
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_navbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/desc_img" />
 
     <ImageView
         android:id="@+id/btnProfileHome"
@@ -39,7 +40,8 @@
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_user"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/desc_img"/>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -62,7 +64,7 @@
             android:fontFamily="@font/bernard"
             android:gravity="center"
             android:padding="5dp"
-            android:text="TODAY"
+            android:text="@string/today"
             android:textColor="@color/white"
             android:textSize="20sp" />
 
@@ -74,23 +76,26 @@
             android:fontFamily="@font/bernard"
             android:gravity="center"
             android:padding="5dp"
-            android:text="IMMEDIATE"
+            android:text="@string/immediate"
             android:textColor="@color/white"
             android:textSize="20sp" />
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="100dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvLeaguesHome"
+        android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:src="@drawable/premier"
+        android:orientation="horizontal"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        tools:listitem="@layout/item_lig_home" />
 
-    <fragment
-        android:name="com.example.liga.ui.home.homeMatches.TodayMatchesFragment"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentHomeHub"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -101,7 +106,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:layout_constraintTop_toBottomOf="@+id/rvLeaguesHome"
         app:navGraph="@navigation/nav_home" />
 
 

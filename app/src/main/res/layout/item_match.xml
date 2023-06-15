@@ -1,6 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#391A83EA"
+    android:layout_marginTop="5dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/imHomeTeam"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/liverpool"
+        android:contentDescription="@string/desc_img"/>
+
+    <TextView
+        android:id="@+id/tvHomeTeam"
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:paddingStart="5dp"
+        android:text="@string/manchester_united" />
+
+    <TextView
+        android:id="@+id/tvTotalMatch"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:text="@string/total" />
+
+    <TextView
+        android:id="@+id/tvGuestTeam"
+        android:layout_width="130dp"
+        android:layout_height="match_parent"
+        android:gravity="right|center_vertical"
+        android:paddingEnd="5dp"
+        android:text="@string/manchester" />
+
+    <ImageView
+        android:id="@+id/imGuestTeam"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/premier"
+        android:contentDescription="@string/desc_img"/>
+</androidx.appcompat.widget.LinearLayoutCompat>
