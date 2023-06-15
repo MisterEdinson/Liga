@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.liga.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ImmediateMatchesFragment : Fragment() {
 
     override fun onCreateView(
