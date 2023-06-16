@@ -1,11 +1,16 @@
 package com.example.liga.di
 
+import android.content.Context
+import androidx.room.Room
+import com.example.liga.data.local.LigaDao
+import com.example.liga.data.local.dao.CompetitionDao
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.utils.Constants.Companion.BASE_URL
 import com.example.liga.domain.utils.Constants.Companion.TOKEN
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -40,4 +45,17 @@ object ApplicationModule {
             .client(okHttpClient())
             .build()
             .create(SimpleRetro::class.java)
+    @Provides
+    @Singleton
+    fun provideRoom(@ApplicationContext context: Context) =
+        Room.databaseBuilder(
+            context,
+            LigaDao::class.java,
+            "liga_database"
+        ).build()
+
+    @Provides
+    fun provideCompetition(appDataBase : LigaDao) : CompetitionDao{
+        return appDataBase.ligaCompetitionDao()
+    }
 }
