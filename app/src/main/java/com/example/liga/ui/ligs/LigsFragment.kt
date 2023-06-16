@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.liga.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_ligs.*
 
 @AndroidEntryPoint
 class LigsFragment : Fragment() {
@@ -16,5 +17,10 @@ class LigsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_ligs, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        tvLeague.text = arguments?.getString("code")
     }
 }

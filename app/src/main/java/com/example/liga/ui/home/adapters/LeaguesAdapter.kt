@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +18,7 @@ import kotlinx.android.synthetic.main.item_lig_home.view.*
 
 class LeaguesAdapter : RecyclerView.Adapter<LeaguesAdapter.LeaguesViewHolder>() {
     class LeaguesViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
     private val callback = object : DiffUtil.ItemCallback<CompetitonModel>() {
 
         override fun areItemsTheSame(
@@ -43,9 +46,17 @@ class LeaguesAdapter : RecyclerView.Adapter<LeaguesAdapter.LeaguesViewHolder>() 
 
     override fun onBindViewHolder(holder: LeaguesViewHolder, position: Int) {
         val item = list.currentList[position]
-        holder.itemView.apply{
-            item.emblemCompetition.let{
+        holder.itemView.apply {
+            item.emblemCompetition.let {
                 imgLeague.loadImage(it.toString())
+            }
+            imgLeague.setOnClickListener {
+                val bundle = bundleOf("code" to item.codeCompetition)
+                if (item.typeCompetition == "LEAGUE") {
+                    findNavController().navigate(R.id.action_homeFragment_to_ligsFragment, bundle)
+                } else {
+                    findNavController().navigate(R.id.action_homeFragment_to_cupsFragment, bundle)
+                }
             }
         }
     }
@@ -54,7 +65,7 @@ class LeaguesAdapter : RecyclerView.Adapter<LeaguesAdapter.LeaguesViewHolder>() 
         return list.currentList.size
     }
 
-    fun ImageView.loadImage(imgUrl:String){
+    fun ImageView.loadImage(imgUrl: String) {
         val imageLoader = ImageLoader.Builder(this.context)
             .componentRegistry { add(SvgDecoder(this@loadImage.context)) }
             .build()
