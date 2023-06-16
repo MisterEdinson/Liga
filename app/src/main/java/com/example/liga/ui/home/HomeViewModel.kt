@@ -10,13 +10,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val repository: Repository):ViewModel() {
-    val ligsLiveData : MutableLiveData<List<CompetitonModel>> = MutableLiveData()
+class HomeViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
+    val ligsLiveData: MutableLiveData<List<CompetitonModel>> = MutableLiveData()
 
     init {
         getCompetitions()
     }
-    private fun getCompetitions(){
+
+    private fun getCompetitions() {
         viewModelScope.launch {
             val responce = repository.getLeagues()
             ligsLiveData.value = responce

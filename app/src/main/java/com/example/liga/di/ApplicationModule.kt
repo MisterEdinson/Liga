@@ -45,6 +45,7 @@ object ApplicationModule {
             .client(okHttpClient())
             .build()
             .create(SimpleRetro::class.java)
+
     @Provides
     @Singleton
     fun provideRoom(@ApplicationContext context: Context) =
@@ -55,7 +56,7 @@ object ApplicationModule {
         ).build()
 
     @Provides
-    fun provideCompetition(appDataBase : LigaDao) : CompetitionDao{
+    fun provideCompetition(appDataBase: LigaDao): CompetitionDao {
         return appDataBase.ligaCompetitionDao()
     }
 }

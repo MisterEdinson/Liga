@@ -5,11 +5,11 @@ import com.example.liga.data.network.models.competitions.CompetitionsItem
 import com.example.liga.data.network.models.competitions.Competitons
 
 class MappingCompetitionHost {
-    fun convertingCompetition(responce : Competitons) : List<CompetitonModel>{
-        val leagues : List<CompetitionsItem?>? = responce.competitions
+    fun convertingCompetition(responce: Competitons): List<CompetitonModel> {
+        val leagues: List<CompetitionsItem?>? = responce.competitions
         val mapper = MappingModelCompetitions()
         val mapping: List<CompetitonModel> =
-            leagues?.mapNotNull { item->
+            leagues?.mapNotNull { item ->
                 item.let {
                     mapper.mappingCompetitionHostToDao(it)
                 }

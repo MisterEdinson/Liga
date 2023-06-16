@@ -4,7 +4,8 @@ import com.example.liga.data.local.models.CompetitonModel
 import com.example.liga.data.network.models.competitions.CompetitionsItem
 import com.example.liga.domain.utils.MapperCompetitionToCompetitionModel
 
-class MappingModelCompetitions : MapperCompetitionToCompetitionModel<CompetitionsItem,CompetitonModel> {
+class MappingModelCompetitions :
+    MapperCompetitionToCompetitionModel<CompetitionsItem, CompetitonModel> {
     override fun mappingCompetitionHostToDao(responce: CompetitionsItem?): CompetitonModel {
         return CompetitonModel(
             id = 0,

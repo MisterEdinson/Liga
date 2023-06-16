@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface SimpleRetro {
     @GET("competitions")
-    suspend fun getCompetitions() : Competitons
+    suspend fun getCompetitions(): Competitons
 }

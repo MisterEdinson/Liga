@@ -7,5 +7,5 @@ import com.example.liga.data.local.models.CompetitonModel
 @Dao
 interface CompetitionDao {
     @Query("SELECT * FROM competitions ORDER BY id ASC")
-    suspend fun getCompetition() : CompetitonModel
+    suspend fun getCompetition(): CompetitonModel
 }
