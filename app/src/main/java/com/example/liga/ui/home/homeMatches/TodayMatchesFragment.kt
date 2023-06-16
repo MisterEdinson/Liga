@@ -25,8 +25,6 @@ class TodayMatchesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.ligsLiveData.observe(viewLifecycleOwner) {
-            Log.d("==========", it.toString())
-        }
+
     }
 }
