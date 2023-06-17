@@ -13,4 +13,7 @@ class Repository @Inject constructor(
         val correctLeagues = MappingCompetitionHost().convertingCompetition(leagues)
         return correctLeagues
     }
+    suspend fun getTableLeague(){
+
+    }
 }
