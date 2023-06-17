@@ -14,20 +14,16 @@ import javax.inject.Inject
 class LeagueViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     val infoLeague: MutableLiveData<LeagueInfoModel> = MutableLiveData()
     val tableLeague : MutableLiveData<List<LeaguesTableModel>> = MutableLiveData()
-    init {
-        getInfoLeague()
-        getLeagueTable()
-    }
 
-    fun getInfoLeague() {
+    fun getInfoLeague(code:String) {
         viewModelScope.launch {
-            val leagueInfo = repo.getLeagueInfo()
+            val leagueInfo = repo.getLeagueInfo(code)
             infoLeague.value = leagueInfo
         }
     }
-    fun getLeagueTable(){
+    fun getLeagueTable(code: String){
         viewModelScope.launch {
-            val leagueTable = repo.getLeagueTable()
+            val leagueTable = repo.getLeagueTable(code)
             tableLeague.value = leagueTable
         }
     }

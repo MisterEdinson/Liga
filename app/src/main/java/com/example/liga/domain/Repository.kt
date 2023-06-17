@@ -19,14 +19,14 @@ class Repository @Inject constructor(
         return correctLeagues
     }
 
-    suspend fun getLeagueInfo(): LeagueInfoModel {
-        val league = retrofit.getLeagueTable("PL")
+    suspend fun getLeagueInfo(code:String): LeagueInfoModel {
+        val league = retrofit.getLeagueTable(code)
         val leagueInfo = MappingLeagueInfo().convertedToLeagueInfo(league)
         return leagueInfo
     }
 
-    suspend fun getLeagueTable(): List<LeaguesTableModel>{
-        val league = retrofit.getLeagueTable("PL")
+    suspend fun getLeagueTable(code:String): List<LeaguesTableModel>{
+        val league = retrofit.getLeagueTable(code)
         val leagueTable = MappingLeagueTable().mapperLeagueTable(league)
         return leagueTable
     }
