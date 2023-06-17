@@ -1,16 +1,20 @@
 package com.example.liga.ui.ligs
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.liga.R
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_ligs.*
 
 @AndroidEntryPoint
 class LigsFragment : Fragment() {
+
+    private val viewModel by viewModels<LeagueViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,6 +25,8 @@ class LigsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        viewModel.infoLeague.observe(viewLifecycleOwner, Observer {
+            Log.d("============", it.toString())
+        })
     }
 }

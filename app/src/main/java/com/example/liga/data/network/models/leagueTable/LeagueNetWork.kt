@@ -1,6 +1,6 @@
 package com.example.liga.data.network.models.leagueTable
 
-data class LeagueTable(
+data class LeagueNetWork(
 	val area: Area? = null,
 	val season: Season? = null,
 	val competition: Competition? = null,

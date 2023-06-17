@@ -4,10 +4,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "league_info")
-data class LagueInfoModel (
+data class LeagueInfoModel (
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0,
-    var season:Int? = null,
+    var season:String? = null,
     var areaId:Int? = null,
     var areaName:String? = null,
     var areaCode:String? = null,
