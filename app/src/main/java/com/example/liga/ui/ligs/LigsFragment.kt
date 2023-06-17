@@ -21,6 +21,6 @@ class LigsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tvLeague.text = arguments?.getString("code")
+
     }
 }
