@@ -2,9 +2,12 @@ package com.example.liga.domain
 
 import com.example.liga.data.local.models.CompetitonModel
 import com.example.liga.data.local.models.LeagueInfoModel
+import com.example.liga.data.local.models.LeaguesTableModel
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.usecase.MappingCompetitionHost
 import com.example.liga.domain.usecase.MappingLeagueInfo
+import com.example.liga.domain.usecase.MappingLeagueTable
+import com.example.liga.domain.usecase.MappingModelLeagueTable
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -16,9 +19,15 @@ class Repository @Inject constructor(
         return correctLeagues
     }
 
-    suspend fun getLeagueInfo(): LeagueInfoModel{
+    suspend fun getLeagueInfo(): LeagueInfoModel {
         val league = retrofit.getLeagueTable("PL")
         val leagueInfo = MappingLeagueInfo().convertedToLeagueInfo(league)
         return leagueInfo
+    }
+
+    suspend fun getLeagueTable(): List<LeaguesTableModel>{
+        val league = retrofit.getLeagueTable("PL")
+        val leagueTable = MappingLeagueTable().mapperLeagueTable(league)
+        return leagueTable
     }
 }

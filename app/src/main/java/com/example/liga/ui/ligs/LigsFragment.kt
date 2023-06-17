@@ -25,8 +25,11 @@ class LigsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.infoLeague.observe(viewLifecycleOwner, Observer {
-            Log.d("============", it.toString())
+//        viewModel.infoLeague.observe(viewLifecycleOwner, Observer {
+////            Log.d("============", it.toString())
+////        })
+        viewModel.tableLeague.observe(viewLifecycleOwner, Observer {
+            Log.d("==============",it.toString())
         })
     }
 }
