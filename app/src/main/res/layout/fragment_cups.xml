@@ -1,15 +1,254 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.cups.CupsFragment">
 
-    <TextView
-        android:id="@+id/tvCups"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="CUPS" />
+    <ImageView
+        android:id="@+id/imgLogoCup"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/lc"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="@string/desc_img" />
 
+    <TextView
+        android:id="@+id/tvNameCup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="16sp"
+        android:text="@string/uefa_champions_league"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
+        app:layout_constraintTop_toTopOf="@+id/imgLogoCup" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="#6F1A83EA"
+        android:text="@string/table"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:padding="2dp"
+        android:textStyle="bold"
+        android:gravity="center"
+        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogoCup" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="2dp"
+        android:textSize="16sp"
+        android:text="@string/matches"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/imgLogoCup" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="#6F1A83EA"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:text="@string/group_a"
+        android:padding="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/positionTeamTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/_10"
+        app:layout_constraintBottom_toBottomOf="@+id/imgTeamTable"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgTeamTable" />
+
+    <ImageView
+        android:id="@+id/imgTeamTable"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/liverpool"
+        app:layout_constraintStart_toEndOf="@+id/positionTeamTable"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        android:contentDescription="@string/desc_img" />
+
+    <TextView
+        android:id="@+id/tvNameTeamTable"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/textview"
+        app:layout_constraintBottom_toBottomOf="@+id/imgTeamTable"
+        app:layout_constraintEnd_toStartOf="@+id/tvGameCountTeamTable"
+        app:layout_constraintStart_toEndOf="@+id/imgTeamTable"
+        app:layout_constraintTop_toTopOf="@+id/imgTeamTable" />
+
+    <TextView
+        android:id="@+id/tvPointTeamTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imgTeamTable"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imgTeamTable" />
+
+    <TextView
+        android:id="@+id/tvGameLostTeamTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/_5"
+        android:textColor="#E81818"
+        app:layout_constraintBottom_toBottomOf="@+id/tvPointTeamTable"
+        app:layout_constraintEnd_toStartOf="@+id/tvPointTeamTable"
+        app:layout_constraintTop_toTopOf="@+id/tvPointTeamTable" />
+
+    <TextView
+        android:id="@+id/tvGameDrawTeamTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/_5"
+        android:textColor="#FFA000"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGameLostTeamTable"
+        app:layout_constraintEnd_toStartOf="@+id/tvGameLostTeamTable"
+        app:layout_constraintTop_toTopOf="@+id/tvGameLostTeamTable" />
+
+    <TextView
+        android:id="@+id/tvGameWinTeamTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/_5"
+        android:textColor="#0BAC05"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGameDrawTeamTable"
+        app:layout_constraintEnd_toStartOf="@+id/tvGameDrawTeamTable"
+        app:layout_constraintTop_toTopOf="@+id/tvGameDrawTeamTable" />
+
+    <TextView
+        android:id="@+id/tvGameCountTeamTable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/_5"
+        app:layout_constraintBottom_toBottomOf="@+id/tvGameWinTeamTable"
+        app:layout_constraintEnd_toStartOf="@+id/tvGameWinTeamTable"
+        app:layout_constraintTop_toTopOf="@+id/tvGameWinTeamTable" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/season"
+        app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
+        app:layout_constraintTop_toBottomOf="@+id/tvNameCup" />
+
+    <TextView
+        android:id="@+id/tvSeasonCup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        android:text="@string/_2022"
+        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+        app:layout_constraintStart_toEndOf="@+id/textView16"
+        app:layout_constraintTop_toTopOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/start"
+        app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/end"
+        app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
+        app:layout_constraintTop_toBottomOf="@+id/textView18" />
+
+    <TextView
+        android:id="@+id/textView20"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/winner"
+        app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <TextView
+        android:id="@+id/tvStartCup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        android:text="@string/_2022_06_21"
+        app:layout_constraintBottom_toBottomOf="@+id/textView18"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toTopOf="@+id/textView18" />
+
+    <TextView
+        android:id="@+id/tvEndCup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        android:text="@string/_2022_06_21"
+        app:layout_constraintBottom_toBottomOf="@+id/textView19"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toTopOf="@+id/textView19" />
+
+    <TextView
+        android:id="@+id/tvWinnerCup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        android:text="@string/manchester_city_fc"
+        app:layout_constraintBottom_toBottomOf="@+id/textView20"
+        app:layout_constraintStart_toEndOf="@+id/textView20"
+        app:layout_constraintTop_toTopOf="@+id/textView20" />
 </androidx.constraintlayout.widget.ConstraintLayout>
