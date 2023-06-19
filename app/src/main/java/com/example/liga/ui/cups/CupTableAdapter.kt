@@ -12,6 +12,8 @@ import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.local.models.LeaguesChampionsTableModel
+import kotlinx.android.synthetic.main.item_cup_table.view.*
+import kotlinx.android.synthetic.main.item_league_table.view.*
 
 class CupTableAdapter : RecyclerView.Adapter<CupTableAdapter.CupViewHolder>() {
     class CupViewHolder(view: View) : RecyclerView.ViewHolder(view)
@@ -43,7 +45,10 @@ class CupTableAdapter : RecyclerView.Adapter<CupTableAdapter.CupViewHolder>() {
     override fun onBindViewHolder(holder: CupViewHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-
+            tvPositionTeamTable.text = item.tablePosition.toString()
+            tvNameTeamTable.text = item.tableTeamName
+            imgTeamTable.loadImage(item.tableTeamCrest.toString())
+            tvPointTeamTable.text = item.tablePlayedPoints.toString()
         }
     }
 

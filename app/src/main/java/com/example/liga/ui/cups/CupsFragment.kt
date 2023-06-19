@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
@@ -32,6 +33,7 @@ class CupsFragment : Fragment() {
         val code = arguments?.getString("code") ?: "CL"
         initAdapter()
         viewModel.getCupsInfo(code)
+        viewModel.getCupsTable(code)
         viewModel.cupsInfo.observe(viewLifecycleOwner) {
             tvSeasonCup.text = it.season
             tvWinnerCup.text = it.winnerName
@@ -40,6 +42,9 @@ class CupsFragment : Fragment() {
             tvNameCup.text = it.competitionName
             imgLogoCup.loadImage(it.competitionEmblem.toString())
         }
+        viewModel.cupsTable.observe(viewLifecycleOwner, Observer{
+            adapter?.list?.submitList(it)
+        })
     }
     private fun initAdapter(){
         adapter = CupTableAdapter()
