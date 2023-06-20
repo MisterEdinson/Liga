@@ -32,7 +32,7 @@ class Repository @Inject constructor(
         return ligChampInfo
     }
 
-    suspend fun getLeagueChampionsTable(code:String): List<LeaguesChampionsTableModel>{
+    suspend fun getLeagueChampionsTable(code:String): List<LeagueChampGsonModel>{
         val ligChamp = retrofit.getLeagueChamp(code)
         val ligChampTable = MappingLeagueChampionsTable().convertLeagueChampionsTable(ligChamp)
         return ligChampTable
