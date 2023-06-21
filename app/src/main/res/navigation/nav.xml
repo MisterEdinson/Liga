@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_homeFragment_to_cupsFragment"
             app:destination="@id/cupsFragment" />
+        <action
+            android:id="@+id/action_homeFragmentHab_to_teamFragment"
+            app:destination="@id/teamFragment" />
     </fragment>
     <fragment
         android:id="@+id/ligsFragment"
@@ -30,7 +33,11 @@
         android:id="@+id/teamFragment"
         android:name="com.example.liga.ui.team.TeamFragment"
         android:label="fragment_team"
-        tools:layout="@layout/fragment_team" />
+        tools:layout="@layout/fragment_team" >
+        <argument
+            android:name="code"
+            app:argType="integer" />
+    </fragment>
     <fragment
         android:id="@+id/cupsFragment"
         android:name="com.example.liga.ui.cups.CupsFragment"

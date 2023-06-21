@@ -25,4 +25,12 @@
     <string name="winner">winner :</string>
     <string name="_2022_06_21">2022-06-21</string>
     <string name="manchester_city_fc">Manchester City FC</string>
+    <string name="gk">GK</string>
+    <string name="manuel_neuer">Manuel Neuer</string>
+    <string name="germany">Germany</string>
+    <string name="_1986_03_27">1986-03-27</string>
+    <string name="team">Team</string>
+    <string name="country">Country</string>
+    <string name="stadium">Stadium</string>
+    <string name="couch">Couch</string>
 </resources>
