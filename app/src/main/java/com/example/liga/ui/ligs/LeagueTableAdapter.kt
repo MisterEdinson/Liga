@@ -1,9 +1,12 @@
 package com.example.liga.ui.ligs
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.AsyncListUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -51,6 +54,11 @@ class LeagueTableAdapter : RecyclerView.Adapter<LeagueTableAdapter.TableViewHold
             tvPositionTeamLeague.text = item.position.toString()
             tvMatchesCountLeague.text = item.teamPlayedGames.toString()
             tvPointCountLeague.text = item.teamPoints.toString()
+
+            item_id_team.setOnClickListener {
+                val bundle = bundleOf("code" to item.teamId)
+                findNavController().navigate(R.id.action_ligsFragment_to_teamFragment,bundle)
+            }
         }
     }
 

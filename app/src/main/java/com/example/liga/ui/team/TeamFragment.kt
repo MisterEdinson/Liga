@@ -1,6 +1,7 @@
 package com.example.liga.ui.team
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,5 +17,11 @@ class TeamFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_team, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val idTeam = arguments?.getInt("code") ?: -1
+        Log.e("ok", idTeam.toString())
     }
 }
