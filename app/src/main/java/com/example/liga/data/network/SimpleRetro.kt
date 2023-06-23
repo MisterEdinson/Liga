@@ -3,6 +3,7 @@ package com.example.liga.data.network
 import com.example.liga.data.network.models.competitions.Competitons
 import com.example.liga.data.network.models.cupsLeagueChampionsTable.LeagueChampionsTable
 import com.example.liga.data.network.models.leagueTable.LeagueNetWork
+import com.example.liga.data.network.models.teams.TeamModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -13,13 +14,13 @@ interface SimpleRetro {
 
     //get item league table
     @GET("competitions/{league_code}/standings")
-    suspend fun getLeagueTable(
-        @Path("league_code") code: String
-    ): LeagueNetWork
+    suspend fun getLeagueTable(@Path("league_code") code: String): LeagueNetWork
 
     //get cups
     @GET("competitions/{league_champ}/standings")
-    suspend fun getLeagueChamp(
-        @Path("league_champ") code: String
-    ): LeagueChampionsTable
+    suspend fun getLeagueChamp(@Path("league_champ") code: String): LeagueChampionsTable
+
+    // get teams
+    @GET("teams/{team_id}")
+    suspend fun getTeam(@Path("team_id") id:Int): TeamModel
 }

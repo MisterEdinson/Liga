@@ -37,4 +37,10 @@ class Repository @Inject constructor(
         val ligChampTable = MappingLeagueChampionsTable().convertLeagueChampionsTable(ligChamp)
         return ligChampTable
     }
+
+    suspend fun getTeam(team_id: Int) : TeamDaoModel{
+        val teamNetwork = retrofit.getTeam(team_id)
+        val teamCorrect = MappingModelTeamInfo().mapperTeam(teamNetwork)
+        return teamCorrect
+    }
 }
