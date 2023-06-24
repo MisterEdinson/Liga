@@ -20,14 +20,14 @@
         android:contentDescription="@string/desc_img" />
 
     <TextView
-        android:id="@+id/tvNameTeam"
+        android:id="@+id/tvNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/team"
         android:textColor="@color/white"
-        android:background="#391A83EA"
+        android:background="#B00564C1"
         app:layout_constraintStart_toEndOf="@+id/imgLogoTeamFrag"
         app:layout_constraintTop_toTopOf="@+id/imgLogoTeamFrag" />
 
@@ -39,9 +39,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/country"
         android:textColor="@color/white"
-        android:background="#391A83EA"
+        android:background="#B00564C1"
         app:layout_constraintStart_toEndOf="@+id/imgLogoTeamFrag"
-        app:layout_constraintTop_toBottomOf="@+id/tvNameTeam" />
+        app:layout_constraintTop_toBottomOf="@+id/tvNameLabel" />
 
     <TextView
         android:id="@+id/tvStadiumTeamLable"
@@ -51,7 +51,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/stadium"
         android:textColor="@color/white"
-        android:background="#391A83EA"
+        android:background="#B00564C1"
         app:layout_constraintStart_toEndOf="@+id/imgLogoTeamFrag"
         app:layout_constraintTop_toBottomOf="@+id/tvContryTeamLable" />
 
@@ -64,7 +64,7 @@
         android:text="@string/couch"
         android:textStyle="bold"
         android:textColor="@color/white"
-        android:background="#391A83EA"
+        android:background="#B00564C1"
         app:layout_constraintStart_toEndOf="@+id/imgLogoTeamFrag"
         app:layout_constraintTop_toBottomOf="@+id/tvStadiumTeamLable" />
 
@@ -84,4 +84,44 @@
         app:layout_constraintTop_toBottomOf="@+id/imgLogoTeamFrag"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_team" />
+
+    <TextView
+        android:id="@+id/tvTeamName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvNameLabel"
+        app:layout_constraintStart_toEndOf="@+id/tvNameLabel"
+        app:layout_constraintTop_toTopOf="@+id/tvNameLabel" />
+
+    <TextView
+        android:id="@+id/tvCountryTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvContryTeamLable"
+        app:layout_constraintStart_toEndOf="@+id/tvContryTeamLable"
+        app:layout_constraintTop_toTopOf="@+id/tvContryTeamLable" />
+
+    <TextView
+        android:id="@+id/tvStadiumName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvStadiumTeamLable"
+        app:layout_constraintStart_toEndOf="@+id/tvStadiumTeamLable"
+        app:layout_constraintTop_toTopOf="@+id/tvStadiumTeamLable" />
+
+    <TextView
+        android:id="@+id/tvCouchTeam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="@+id/tvCouchTeamLable"
+        app:layout_constraintStart_toEndOf="@+id/tvCouchTeamLable"
+        app:layout_constraintTop_toTopOf="@+id/tvCouchTeamLable" />
 </androidx.constraintlayout.widget.ConstraintLayout>
