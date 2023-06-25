@@ -1,17 +1,19 @@
 package com.example.liga.domain
 
+import com.example.liga.data.local.dao.CompetitionDao
 import com.example.liga.data.local.models.*
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.usecase.*
 import javax.inject.Inject
 
 class Repository @Inject constructor(
-    private val retrofit: SimpleRetro
+    private val retrofit: SimpleRetro, private val dao: CompetitionDao
 ) {
     suspend fun getLeagues(): List<CompetitonModel> {
         val leagues = retrofit.getCompetitions()
         val correctLeagues = MappingCompetitionHost().convertingCompetition(leagues)
-        return correctLeagues
+        dao.insertCompetition(correctLeagues)
+        return dao.getCompetition()
     }
 
     suspend fun getLeagueInfo(code:String): LeagueInfoModel {
