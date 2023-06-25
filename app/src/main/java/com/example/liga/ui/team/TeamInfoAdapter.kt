@@ -7,10 +7,7 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.liga.R
-import com.example.liga.data.local.models.TeamDaoModel
-import com.example.liga.data.network.models.cupsLeagueChampionsTable.TableItem
 import com.example.liga.data.network.models.teams.SquadItem
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_team.view.*
 
 class TeamInfoAdapter:RecyclerView.Adapter<TeamInfoAdapter.TeamViewHolder>() {
@@ -35,13 +32,25 @@ class TeamInfoAdapter:RecyclerView.Adapter<TeamInfoAdapter.TeamViewHolder>() {
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-            tvPositionPlayer.text = item.position
+            tvPositionPlayer.text = positionPlay(item.position.toString())
             tvNamePlayer.text = item.name
+            tvBirdtsdayPlayer.text = item.dateOfBirth
+            tvCountryPlayer.text = item.nationality
         }
     }
 
     override fun getItemCount(): Int {
         return list.currentList.size
+    }
+
+    fun positionPlay(pos: String): String {
+        return when(pos){
+            "Goalkeeper" -> "GK"
+            "Defence" -> "DF"
+            "Midfield" -> "MD"
+            "Offence" -> "AT"
+            else -> "--"
+        }
     }
 
     class TeamViewHolder(view:View): RecyclerView.ViewHolder(view)
