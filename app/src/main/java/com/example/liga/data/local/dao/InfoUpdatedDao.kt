@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.liga.data.local.models.CompetitonModel
 import com.example.liga.data.local.models.LeagueUpdateInfoModel
 
 @Dao
@@ -13,5 +12,5 @@ interface InfoUpdatedDao {
     suspend fun getInfoUpdate(): LeagueUpdateInfoModel
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertInfoUpdate(insert : LeagueUpdateInfoModel)
+    suspend fun insertInfoUpdate(insert: LeagueUpdateInfoModel)
 }

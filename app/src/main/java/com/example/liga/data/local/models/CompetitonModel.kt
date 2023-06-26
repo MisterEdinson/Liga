@@ -24,4 +24,5 @@ data class CompetitonModel(
     var winner: String? = null,
     var numberOfAvailableSeasons: String? = null,
     var lastUpdated: String? = null,
+    var dateAdd:String? = null
 ) : Serializable
