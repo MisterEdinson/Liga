@@ -3,11 +3,15 @@ package com.example.liga.domain.usecase
 import com.example.liga.data.local.models.LeagueInfoModel
 import com.example.liga.data.network.models.leagueTable.LeagueNetWork
 import com.example.liga.domain.utils.MapperLeagueNetWorkToLeagueInfoModel
+import com.google.gson.Gson
 
 class MappingModelLeagueInfo :
     MapperLeagueNetWorkToLeagueInfoModel<LeagueNetWork, LeagueInfoModel> {
 
     override fun mappingLeagueToLeagueInfoDao(responce: LeagueNetWork?): LeagueInfoModel {
+        val tableLeague = responce?.standings?.get(0)?.table
+        val tableInf = Gson()
+        val tableSave = tableInf.toJson(tableLeague)
         return LeagueInfoModel(
             id = 0,
             season = responce?.filters?.season,
@@ -24,6 +28,7 @@ class MappingModelLeagueInfo :
             seasonStart = responce?.season?.startDate,
             seasonEnd = responce?.season?.endDate,
             seasonCurrentMatchday = responce?.season?.currentMatchday,
+            table = tableSave
         )
     }
 

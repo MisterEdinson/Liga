@@ -13,6 +13,8 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
+import com.example.liga.data.network.models.leagueTable.TableItem
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_ligs.*
 
@@ -33,9 +35,9 @@ class LigsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val code = arguments?.getString("code") ?: "PL"
         initAdapter()
-        viewModel.getInfoLeague(code)
-        viewModel.getLeagueTable(code)
-        viewModel.infoLeague.observe(viewLifecycleOwner, Observer {
+        viewModel.getTableChampionship(code)
+
+        viewModel.getChampionship.observe(viewLifecycleOwner, Observer {
             tvLeagueCountry.text = it.areaName
             imgLeagueLogo.loadImage(it.competitionEmblem.toString())
             imgLeagueFlag.loadImage(it.areaFlag.toString())
@@ -43,10 +45,11 @@ class LigsFragment : Fragment() {
             tvLeagueGameDay.text = it.seasonCurrentMatchday.toString()
             tvLeagueStartDate.text = it.seasonStart
             tvLeagueDateEnd.text = it.seasonEnd
-        })
 
-        viewModel.tableLeague.observe(viewLifecycleOwner, Observer {
-            adapter?.list?.submitList(it)
+            val gson = Gson()
+            val stringTable = it.table
+            val tableList = gson.fromJson(stringTable, Array<TableItem>::class.java)
+            adapter?.list?.submitList(tableList.toList())
         })
     }
     private fun initAdapter(){

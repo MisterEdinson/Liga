@@ -9,6 +9,7 @@ import javax.inject.Inject
 class Repository @Inject constructor(
     private val retrofit: SimpleRetro, private val dao: CompetitionDao
 ) {
+    //get competitions
     suspend fun getLeagues(): List<CompetitonModel> {
         val infoUpdate = dao.getCompetition()
         return infoUpdate.ifEmpty {
@@ -18,18 +19,18 @@ class Repository @Inject constructor(
             correctLeagues
         }
     }
-
-    suspend fun getLeagueInfo(code: String): LeagueInfoModel {
+    //get championship
+    suspend fun getLeagueTable(code: String): LeagueInfoModel {
         val league = retrofit.getLeagueTable(code)
         val leagueInfo = MappingLeagueInfo().convertedToLeagueInfo(league)
         return leagueInfo
     }
 
-    suspend fun getLeagueTable(code: String): List<LeaguesTableModel> {
-        val league = retrofit.getLeagueTable(code)
-        val leagueTable = MappingLeagueTable().mapperLeagueTable(league)
-        return leagueTable
-    }
+//    suspend fun getLeagueTable(code: String): List<LeaguesTableModel> {
+//        val league = retrofit.getLeagueTable(code)
+//        val leagueTable = MappingLeagueTable().mapperLeagueTable(league)
+//        return leagueTable
+//    }
 
     suspend fun getLeagueChampionsInfo(code: String): LeaguesChampionsInfoModel {
         val ligChamp = retrofit.getLeagueChamp(code)

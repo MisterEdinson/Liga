@@ -21,4 +21,5 @@ data class LeagueInfoModel (
     var seasonStart:String? = null,
     var seasonEnd:String? = null,
     var seasonCurrentMatchday:Int? = null,
+    var table:String? = null
 )

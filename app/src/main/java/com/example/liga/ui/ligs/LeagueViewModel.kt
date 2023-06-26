@@ -12,19 +12,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LeagueViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
-    val infoLeague: MutableLiveData<LeagueInfoModel> = MutableLiveData()
-    val tableLeague : MutableLiveData<List<LeaguesTableModel>> = MutableLiveData()
+    val getChampionship: MutableLiveData<LeagueInfoModel> = MutableLiveData()
 
-    fun getInfoLeague(code:String) {
+    fun getTableChampionship(code:String){
         viewModelScope.launch {
-            val leagueInfo = repo.getLeagueInfo(code)
-            infoLeague.value = leagueInfo
-        }
-    }
-    fun getLeagueTable(code: String){
-        viewModelScope.launch {
-            val leagueTable = repo.getLeagueTable(code)
-            tableLeague.value = leagueTable
+            val response = repo.getLeagueTable(code)
+            getChampionship.value = response
         }
     }
 }

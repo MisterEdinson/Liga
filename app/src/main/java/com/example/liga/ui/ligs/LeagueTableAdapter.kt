@@ -1,6 +1,5 @@
 package com.example.liga.ui.ligs
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,14 +7,13 @@ import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
-import androidx.recyclerview.widget.AsyncListUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
-import com.example.liga.data.local.models.LeaguesTableModel
+import com.example.liga.data.network.models.leagueTable.TableItem
 import kotlinx.android.synthetic.main.item_league_table.view.*
 import kotlinx.android.synthetic.main.item_lig_home.view.*
 
@@ -23,19 +21,19 @@ class LeagueTableAdapter : RecyclerView.Adapter<LeagueTableAdapter.TableViewHold
 
     class TableViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    private val callback = object : DiffUtil.ItemCallback<LeaguesTableModel>(){
+    private val callback = object : DiffUtil.ItemCallback<TableItem>(){
         override fun areItemsTheSame(
-            oldItem: LeaguesTableModel,
-            newItem: LeaguesTableModel
+            oldItem: TableItem,
+            newItem: TableItem
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.team?.id == newItem.team?.id
         }
 
         override fun areContentsTheSame(
-            oldItem: LeaguesTableModel,
-            newItem: LeaguesTableModel
+            oldItem: TableItem,
+            newItem: TableItem
         ): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.team?.id == newItem.team?.id
         }
     }
 
@@ -49,14 +47,14 @@ class LeagueTableAdapter : RecyclerView.Adapter<LeagueTableAdapter.TableViewHold
     override fun onBindViewHolder(holder: TableViewHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-            imgTeamLeague.loadImage(item.teamCrest.toString())
-            tvNameTeamLeague.text = item.teamName
+            imgTeamLeague.loadImage(item.team?.crest.toString())
+            tvNameTeamLeague.text = item.team?.name
             tvPositionTeamLeague.text = item.position.toString()
-            tvMatchesCountLeague.text = item.teamPlayedGames.toString()
-            tvPointCountLeague.text = item.teamPoints.toString()
+            tvMatchesCountLeague.text = item.playedGames.toString()
+            tvPointCountLeague.text = item.points.toString()
 
             item_id_team.setOnClickListener {
-                val bundle = bundleOf("code" to item.teamId)
+                val bundle = bundleOf("code" to item.team?.id)
                 findNavController().navigate(R.id.action_ligsFragment_to_teamFragment,bundle)
             }
         }
