@@ -25,10 +25,15 @@ class Repository @Inject constructor(
 
     //get championship
     suspend fun getLeagueChampionship(code: String): LeagueInfoModel {
-        val league = retrofit.getLeagueTable(code)
-        val leagueInfo = MappingLeagueInfo().convertedToLeagueInfo(league)
-        daoChampionship.insertChampionship(leagueInfo)
-        return leagueInfo
+        val localChampionship = daoChampionship.getChampionship(code)
+        return if (localChampionship != null) {
+            localChampionship
+        } else {
+            val league = retrofit.getLeagueTable(code)
+            val leagueInfo = MappingLeagueInfo().convertedToLeagueInfo(league)
+            daoChampionship.insertChampionship(leagueInfo)
+            leagueInfo
+        }
     }
 
     suspend fun getLeagueChampionsInfo(code: String): LeaguesChampionsInfoModel {
