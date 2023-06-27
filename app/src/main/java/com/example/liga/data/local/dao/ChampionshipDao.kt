@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.example.liga.data.local.models.LeagueInfoModel
 
 @Dao
-interface ChampionshipDDao {
+interface ChampionshipDao {
     @Query("SELECT * FROM championship_info WHERE competitionCode LIKE :code")
     suspend fun getChampionship(code: String): LeagueInfoModel
 
