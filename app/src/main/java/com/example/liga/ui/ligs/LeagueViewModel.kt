@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.liga.data.local.models.LeagueInfoModel
-import com.example.liga.data.local.models.LeaguesTableModel
 import com.example.liga.domain.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -14,9 +13,9 @@ import javax.inject.Inject
 class LeagueViewModel @Inject constructor(private val repo: Repository) : ViewModel() {
     val getChampionship: MutableLiveData<LeagueInfoModel> = MutableLiveData()
 
-    fun getTableChampionship(code:String){
+    fun getTableChampionship(code: String) {
         viewModelScope.launch {
-            val response = repo.getLeagueTable(code)
+            val response = repo.getLeagueChampionship(code)
             getChampionship.value = response
         }
     }

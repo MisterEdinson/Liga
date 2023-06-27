@@ -1,14 +1,12 @@
 package com.example.liga.ui.ligs
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
@@ -22,7 +20,7 @@ import kotlinx.android.synthetic.main.fragment_ligs.*
 class LigsFragment : Fragment() {
 
     private val viewModel by viewModels<LeagueViewModel>()
-    private var adapter : LeagueTableAdapter? = null
+    private var adapter: LeagueTableAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,8 +34,7 @@ class LigsFragment : Fragment() {
         val code = arguments?.getString("code") ?: "PL"
         initAdapter()
         viewModel.getTableChampionship(code)
-
-        viewModel.getChampionship.observe(viewLifecycleOwner, Observer {
+        viewModel.getChampionship.observe(viewLifecycleOwner) {
             tvLeagueCountry.text = it.areaName
             imgLeagueLogo.loadImage(it.competitionEmblem.toString())
             imgLeagueFlag.loadImage(it.areaFlag.toString())
@@ -50,9 +47,10 @@ class LigsFragment : Fragment() {
             val stringTable = it.table
             val tableList = gson.fromJson(stringTable, Array<TableItem>::class.java)
             adapter?.list?.submitList(tableList.toList())
-        })
+        }
     }
-    private fun initAdapter(){
+
+    private fun initAdapter() {
         adapter = LeagueTableAdapter()
         rvLeagueTable.adapter = adapter
     }

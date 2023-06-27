@@ -3,8 +3,8 @@ package com.example.liga.di
 import android.content.Context
 import androidx.room.Room
 import com.example.liga.data.local.LigaDao
+import com.example.liga.data.local.dao.ChampionshipDDao
 import com.example.liga.data.local.dao.CompetitionDao
-import com.example.liga.data.local.dao.InfoUpdatedDao
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.utils.Constants.Companion.BASE_URL
 import com.example.liga.domain.utils.Constants.Companion.TOKEN
@@ -62,7 +62,7 @@ object ApplicationModule {
     }
 
     @Provides
-    fun providesInfoUpdate(appDataBase: LigaDao): InfoUpdatedDao {
-        return appDataBase.LeagueUpdateInfoDao()
+    fun providesInfoUpdate(appDataBase: LigaDao): ChampionshipDDao {
+        return appDataBase.leagueChampionship()
     }
 }
