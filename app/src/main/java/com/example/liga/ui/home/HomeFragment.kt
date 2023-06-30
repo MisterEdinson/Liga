@@ -14,7 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private var adapter: LeaguesAdapter? = null
-    private var binding : FragmentHomeBinding? = null
+    private var binding: FragmentHomeBinding? = null
     private val _binding get() = binding!!
     val viewModel: HomeViewModel by activityViewModels()
 
@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(layoutInflater,container, false)
+        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
         return _binding.root
     }
 
@@ -33,7 +33,8 @@ class HomeFragment : Fragment() {
             adapter?.list?.submitList(it)
         }
     }
-    private fun initAdapter(){
+
+    private fun initAdapter() {
         adapter = LeaguesAdapter()
         _binding.rvLeaguesHome.adapter = adapter
     }
