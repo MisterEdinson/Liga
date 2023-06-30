@@ -3,6 +3,7 @@ package com.example.liga.data.network
 import com.example.liga.data.network.models.competitions.Competitons
 import com.example.liga.data.network.models.cupsLeagueChampionsTable.LeagueChampionsTable
 import com.example.liga.data.network.models.leagueTable.LeagueNetWork
+import com.example.liga.data.network.models.matches.MatchesRetro
 import com.example.liga.data.network.models.teams.TeamModel
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -11,6 +12,12 @@ interface SimpleRetro {
     // get all competitions
     @GET("competitions")
     suspend fun getCompetitions(): Competitons
+
+    //get match day
+    @GET("matches")
+    suspend fun getMatchDay(): MatchesRetro
+
+    //get match immediate
 
     //get item league table
     @GET("competitions/{league_code}/standings")
