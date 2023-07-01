@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.liga.R
+import com.example.liga.data.network.models.matches.MatchesItem
 import com.example.liga.ui.home.HomeViewModel
+import com.example.liga.ui.home.adapters.MatchDayAdapter
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_today_matches.*
 
@@ -17,6 +20,7 @@ import kotlinx.android.synthetic.main.fragment_today_matches.*
 class TodayMatchesFragment : Fragment() {
 
     val viewModel: HomeViewModel by activityViewModels()
+    var adapter: MatchDayAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,9 +32,14 @@ class TodayMatchesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initAdapter()
+        viewModel.matchDayLiveData.observe(viewLifecycleOwner) {
+            val gson = Gson()
+            val stringTable = it.match
+            val tableList = gson.fromJson(stringTable, Array<MatchesItem>::class.java)
+            adapter?.list?.submitList(tableList.toList())
+        }
         rvHomeDayMatch.setOnTouchListener(object : SwipeHome(view.context) {
-
             override fun onSwipeRight() {
                 findNavController().navigate(R.id.action_todayMatchesFragment_to_immediateMatchesFragment)
                 Toast.makeText(
@@ -40,5 +49,10 @@ class TodayMatchesFragment : Fragment() {
                 ).show()
             }
         })
+    }
+
+    private fun initAdapter() {
+        adapter = MatchDayAdapter()
+        rvHomeDayMatch.adapter = adapter
     }
 }

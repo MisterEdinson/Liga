@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#391A83EA"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#651A83EA"
     android:layout_marginTop="5dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imHomeTeam"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/liverpool"
-        android:contentDescription="@string/desc_img"/>
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/desc_img"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/liverpool" />
 
     <TextView
         android:id="@+id/tvHomeTeam"
@@ -20,15 +25,27 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:paddingStart="5dp"
-        android:text="@string/manchester_united" />
+        android:text="@string/manchester_united"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imHomeTeam"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvTotalMatch"
         android:layout_width="0dp"
-        android:layout_weight="1"
-        android:gravity="center"
         android:layout_height="match_parent"
-        android:text="@string/total" />
+        android:layout_marginBottom="4dp"
+        android:gravity="center|top"
+        android:text="@string/total"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvStatusMatch"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/tvStatusMatch"
+        app:layout_constraintTop_toBottomOf="@+id/tvStatusMatch"
+        app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/tvGuestTeam"
@@ -36,12 +53,35 @@
         android:layout_height="match_parent"
         android:gravity="right|center_vertical"
         android:paddingEnd="5dp"
-        android:text="@string/manchester" />
+        android:text="@string/manchester"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imGuestTeam"
+        app:layout_constraintEnd_toStartOf="@+id/imGuestTeam"
+        app:layout_constraintTop_toTopOf="@+id/imGuestTeam" />
 
     <ImageView
         android:id="@+id/imGuestTeam"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/premier"
-        android:contentDescription="@string/desc_img"/>
-</androidx.appcompat.widget.LinearLayoutCompat>
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:contentDescription="@string/desc_img"
+        android:padding="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/premier" />
+
+    <TextView
+        android:id="@+id/tvStatusMatch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="@string/status"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/tvGuestTeam"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/tvHomeTeam"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

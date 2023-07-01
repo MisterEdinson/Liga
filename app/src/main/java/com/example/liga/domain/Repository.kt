@@ -57,4 +57,11 @@ class Repository @Inject constructor(
         daoTeam.insertTeamDB(teamCorrect)
         return teamCorrect
     }
+
+    //get matchday
+    suspend fun getMatchDay():MatchesDaoModel{
+        val matchDayNet = retrofit.getMatchDay()
+        val map = MapperMatchDay().mappingMatchToDaoModel(matchDayNet)
+        return map
+    }
 }
