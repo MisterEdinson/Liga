@@ -15,6 +15,11 @@ import com.example.liga.R
 import com.example.liga.data.network.models.matches.MatchesItem
 import com.example.liga.domain.utils.TimeConverter
 import kotlinx.android.synthetic.main.item_match.view.*
+import java.time.*
+
+import java.time.format.DateTimeFormatter
+import java.util.*
+
 
 class MatchDayAdapter : RecyclerView.Adapter<MatchDayAdapter.MatchDayHolder>() {
 

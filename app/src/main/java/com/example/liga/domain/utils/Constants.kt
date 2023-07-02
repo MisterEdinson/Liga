@@ -5,5 +5,6 @@ class Constants {
         const val BASE_URL = "https://api.football-data.org/v4/"
         const val TOKEN = "bfcce5867dad4324822fab5d2417d36d"
         const val SWIPE_DIST = 100
+        const val IMMEDIATE_DAY = 10
     }
 }
