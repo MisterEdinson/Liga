@@ -1,6 +1,5 @@
 package com.example.liga.ui.home.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,10 +14,6 @@ import com.example.liga.R
 import com.example.liga.data.network.models.matches.MatchesItem
 import com.example.liga.domain.utils.TimeConverter
 import kotlinx.android.synthetic.main.item_match.view.*
-import java.time.*
-
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 
 class MatchDayAdapter : RecyclerView.Adapter<MatchDayAdapter.MatchDayHolder>() {
@@ -57,6 +52,10 @@ class MatchDayAdapter : RecyclerView.Adapter<MatchDayAdapter.MatchDayHolder>() {
             val time = TimeConverter().dateConverterDay(item.utcDate)
             if(item.status == "TIMED"){
                 tvTotalMatch.text = time
+            }
+            if(item.status == "FINISHED"){
+                tvTotalMatch.text = "${item.score?.fullTime?.home}:${item.score?.fullTime?.away}"
+                tvTotalMatch.typeface.isBold
             }
         }
     }
