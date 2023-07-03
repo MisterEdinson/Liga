@@ -1,7 +1,6 @@
 package com.example.liga.ui.home.homeMatches
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import com.example.liga.R
 import com.example.liga.domain.utils.Constants.Companion.IMMEDIATE_DAY
 import com.example.liga.domain.utils.TimeConverter
 import com.example.liga.ui.home.HomeViewModel
+import com.example.liga.ui.home.adapters.ImmediateMatchAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_immediate_matches.*
 import java.text.DateFormat
@@ -23,7 +23,8 @@ import java.util.*
 @AndroidEntryPoint
 class ImmediateMatchesFragment : Fragment() {
 
-    private val viewModel : HomeViewModel by activityViewModels()
+    private val viewModel: HomeViewModel by activityViewModels()
+    private var adapter: ImmediateMatchAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,16 +34,16 @@ class ImmediateMatchesFragment : Fragment() {
         val currentDate = Date()
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val today = dateFormat.format(currentDate)
-        val dayImmediate = TimeConverter().getDayImmediate(currentDate,IMMEDIATE_DAY)
-
+        val dayImmediate = TimeConverter().getDayImmediate(currentDate, IMMEDIATE_DAY)
+        viewModel.getImmediateDay(today, dayImmediate)
         return inflater.inflate(R.layout.fragment_immediate_matches, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        initAdapter()
         viewModel.matchImmediateLiveData.observe(viewLifecycleOwner) {
-            Log.e("log", it.toString())
+            adapter?.list?.submitList(it)
         }
 
         rvHomeImmediateMatch.setOnTouchListener(object : SwipeHome(view.context) {
@@ -55,5 +56,10 @@ class ImmediateMatchesFragment : Fragment() {
                 ).show()
             }
         })
+    }
+
+    fun initAdapter() {
+        adapter = ImmediateMatchAdapter()
+        rvHomeImmediateMatch.adapter = adapter
     }
 }

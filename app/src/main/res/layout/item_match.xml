@@ -21,11 +21,12 @@
 
     <TextView
         android:id="@+id/tvHomeTeam"
-        android:layout_width="130dp"
+        android:layout_width="135dp"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:paddingStart="5dp"
-        android:text="@string/manchester_united"
+        android:textSize="12sp"
+        android:text="Command not defined"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -49,11 +50,12 @@
 
     <TextView
         android:id="@+id/tvGuestTeam"
-        android:layout_width="130dp"
+        android:layout_width="135dp"
         android:layout_height="match_parent"
         android:gravity="right|center_vertical"
         android:paddingEnd="5dp"
-        android:text="@string/manchester"
+        android:textSize="12sp"
+        android:text="Command not defined"
         android:textColor="@color/white"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imGuestTeam"

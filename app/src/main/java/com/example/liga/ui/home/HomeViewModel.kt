@@ -20,7 +20,6 @@ class HomeViewModel @Inject constructor(private val repository: Repository) : Vi
     init {
         getCompetitions()
         getMatchDay()
-        getImmediateDay()
     }
 
     private fun getCompetitions() {
@@ -37,9 +36,9 @@ class HomeViewModel @Inject constructor(private val repository: Repository) : Vi
         }
     }
 
-    private fun getImmediateDay(dateTo:String, dateFrom:String){
+    fun getImmediateDay(dateTo:String, dateFrom:String){
         viewModelScope.launch {
-            val response = repository.getMatchImmediate()
+            val response = repository.getMatchImmediate(dateTo,dateFrom)
             matchImmediateLiveData.value = response
         }
     }
