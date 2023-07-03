@@ -40,6 +40,11 @@ class ImmediateMatchesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.matchImmediateLiveData.observe(viewLifecycleOwner) {
+            Log.e("log", it.toString())
+        }
+
         rvHomeImmediateMatch.setOnTouchListener(object : SwipeHome(view.context) {
             override fun onSwipeLeft() {
                 findNavController().navigate(R.id.action_immediateMatchesFragment_to_todayMatchesFragment)

@@ -59,9 +59,16 @@ class Repository @Inject constructor(
     }
 
     //get matchday
-    suspend fun getMatchDay():MatchesDaoModel{
+    suspend fun getMatchDay(): MatchesDaoModel {
         val matchDayNet = retrofit.getMatchDay()
         val map = MapperMatchDay().mappingMatchToDaoModel(matchDayNet)
+        return map
+    }
+
+    //get immediate matchday
+    suspend fun getMatchImmediate(dateTo:String,dateFrom:String): List<MatchesAllSave> {
+        val matchImmediateNet = retrofit.getMatchImmediate(dateTo,dateFrom)
+        val map = MappingAllMatch().convertedMatch(matchImmediateNet)
         return map
     }
 }
