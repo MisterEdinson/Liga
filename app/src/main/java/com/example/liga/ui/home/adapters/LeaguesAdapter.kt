@@ -55,7 +55,9 @@ class LeaguesAdapter : RecyclerView.Adapter<LeaguesAdapter.LeaguesViewHolder>() 
                 if (item.typeCompetition == "LEAGUE") {
                     findNavController().navigate(R.id.action_homeFragment_to_ligsFragment, bundle)
                 } else {
-                    findNavController().navigate(R.id.action_homeFragment_to_cupsFragment, bundle)
+                    if(item.codeCompetition == "CL"){
+                        findNavController().navigate(R.id.action_homeFragment_to_cupsFragment, bundle)
+                    }
                 }
             }
         }

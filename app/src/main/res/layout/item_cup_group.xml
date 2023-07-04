@@ -1,94 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <TextView
         android:id="@+id/tvPositionTeamTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/_10"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/imgTeamTable"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgTeamTable" />
+        android:layout_width="16dp"
+        android:layout_height="match_parent"
+        android:text="5"
+        android:gravity="center"
+        android:textSize="16sp" />
 
     <ImageView
         android:id="@+id/imgTeamTable"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginStart="8dp"
-        android:contentDescription="@string/desc_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:padding="5dp"
         android:src="@drawable/liverpool"
-        app:layout_constraintStart_toEndOf="@+id/tvPositionTeamTable"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:scaleType="centerCrop" />
 
     <TextView
         android:id="@+id/tvNameTeamTable"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/textview"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/imgTeamTable"
-        app:layout_constraintEnd_toStartOf="@+id/tvGameCountTeamTable"
-        app:layout_constraintStart_toEndOf="@+id/imgTeamTable"
-        app:layout_constraintTop_toTopOf="@+id/imgTeamTable" />
-
-    <TextView
-        android:id="@+id/tvPointTeamTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/_18"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@+id/imgTeamTable"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imgTeamTable" />
-
-    <TextView
-        android:id="@+id/tvGameLostTeamTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/_5"
-        android:textColor="#E81818"
-        app:layout_constraintBottom_toBottomOf="@+id/tvPointTeamTable"
-        app:layout_constraintEnd_toStartOf="@+id/tvPointTeamTable"
-        app:layout_constraintTop_toTopOf="@+id/tvPointTeamTable" />
-
-    <TextView
-        android:id="@+id/tvGameDrawTeamTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/_5"
-        android:textColor="#FFA000"
-        app:layout_constraintBottom_toBottomOf="@+id/tvGameLostTeamTable"
-        app:layout_constraintEnd_toStartOf="@+id/tvGameLostTeamTable"
-        app:layout_constraintTop_toTopOf="@+id/tvGameLostTeamTable" />
-
-    <TextView
-        android:id="@+id/tvGameWinTeamTable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/_5"
-        android:textColor="#0BAC05"
-        app:layout_constraintBottom_toBottomOf="@+id/tvGameDrawTeamTable"
-        app:layout_constraintEnd_toStartOf="@+id/tvGameDrawTeamTable"
-        app:layout_constraintTop_toTopOf="@+id/tvGameDrawTeamTable" />
+        android:layout_height="match_parent"
+        android:gravity="center|left"
+        android:layout_weight="1"
+        android:text="Manchester"
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvGameCountTeamTable"
+        android:text="1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:text="@string/_5"
-        app:layout_constraintBottom_toBottomOf="@+id/tvGameWinTeamTable"
-        app:layout_constraintEnd_toStartOf="@+id/tvGameWinTeamTable"
-        app:layout_constraintTop_toTopOf="@+id/tvGameWinTeamTable" />
+        android:textSize="16sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvGameWinTeamTable"
+        android:text="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvGameLostTeamTable"
+        android:text="3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvGameDrawTeamTable"
+        android:text="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvPointTeamTable"
+        android:text="4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp" />
+
+</LinearLayout>

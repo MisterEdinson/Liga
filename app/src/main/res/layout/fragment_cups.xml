@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/bg_liga_chemp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.cups.CupsFragment">
@@ -14,6 +15,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/lc"
+        android:padding="4dp"
+        android:background="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:contentDescription="@string/desc_img" />
@@ -26,7 +29,7 @@
         android:textSize="16sp"
         android:text="@string/uefa_champions_league"
         android:textStyle="bold"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
         app:layout_constraintTop_toTopOf="@+id/imgLogoCup" />
 
@@ -36,13 +39,13 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="#6F1A83EA"
+        android:background="#9A1A83EA"
         android:text="@string/table"
-        android:textColor="@color/black"
         android:textSize="16sp"
         android:padding="2dp"
         android:textStyle="bold"
         android:gravity="center"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@+id/textView5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +62,7 @@
         android:padding="2dp"
         android:textSize="16sp"
         android:text="@string/matches"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/textView2"
@@ -72,6 +76,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/season"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
         app:layout_constraintTop_toBottomOf="@+id/tvNameCup" />
 
@@ -82,6 +87,7 @@
         android:layout_marginStart="8dp"
         android:textStyle="bold"
         android:text="@string/_2022"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textView16"
         app:layout_constraintStart_toEndOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="@+id/textView16" />
@@ -93,6 +99,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/start"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
@@ -103,6 +110,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/end"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
@@ -113,6 +121,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/winner"
+        android:textColor="@color/white"
         app:layout_constraintStart_toEndOf="@+id/imgLogoCup"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
 
@@ -123,6 +132,7 @@
         android:layout_marginStart="8dp"
         android:textStyle="bold"
         android:text="@string/_2022_06_21"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textView18"
         app:layout_constraintStart_toEndOf="@+id/textView18"
         app:layout_constraintTop_toTopOf="@+id/textView18" />
@@ -134,6 +144,7 @@
         android:layout_marginStart="8dp"
         android:textStyle="bold"
         android:text="@string/_2022_06_21"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textView19"
         app:layout_constraintStart_toEndOf="@+id/textView19"
         app:layout_constraintTop_toTopOf="@+id/textView19" />
@@ -145,6 +156,7 @@
         android:layout_marginStart="8dp"
         android:textStyle="bold"
         android:text="@string/manchester_city_fc"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textView20"
         app:layout_constraintStart_toEndOf="@+id/textView20"
         app:layout_constraintTop_toTopOf="@+id/textView20" />
