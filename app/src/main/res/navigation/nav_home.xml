@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_immediate_matches" >
         <action
             android:id="@+id/action_immediateMatchesFragment_to_todayMatchesFragment"
-            app:destination="@id/todayMatchesFragment" />
+            app:destination="@id/todayMatchesFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/todayMatchesFragment"
@@ -21,6 +25,10 @@
         tools:layout="@layout/fragment_today_matches" >
         <action
             android:id="@+id/action_todayMatchesFragment_to_immediateMatchesFragment"
-            app:destination="@id/immediateMatchesFragment" />
+            app:destination="@id/immediateMatchesFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
 </navigation>
