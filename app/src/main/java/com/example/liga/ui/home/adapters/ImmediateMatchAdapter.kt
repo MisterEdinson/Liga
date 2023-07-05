@@ -4,6 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -61,6 +63,15 @@ class ImmediateMatchAdapter : RecyclerView.Adapter<ImmediateMatchAdapter.Immedia
                 imGuestTeam.loadImage(item.emblemCompetition.toString())
             }
             tvGuestTeam.text = item.nameAwayTeam
+
+            tvHomeTeam.setOnClickListener {
+                val bundle = bundleOf("code" to item.idHomeTeam)
+                findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment,bundle)
+            }
+            tvGuestTeam.setOnClickListener {
+                val bundle = bundleOf("code" to item.idAwayTeam)
+                findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment,bundle)
+            }
         }
     }
 

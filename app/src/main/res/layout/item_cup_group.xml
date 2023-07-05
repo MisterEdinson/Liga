@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#651A83EA"
+    android:paddingStart="4dp"
+    android:paddingEnd="4dp"
     android:orientation="horizontal">
 
     <TextView
@@ -9,6 +13,7 @@
         android:layout_width="16dp"
         android:layout_height="match_parent"
         android:text="5"
+        android:textColor="@color/white"
         android:gravity="center"
         android:textSize="16sp" />
 
@@ -26,42 +31,62 @@
         android:layout_height="match_parent"
         android:gravity="center|left"
         android:layout_weight="1"
+        android:textColor="@color/white"
         android:text="Manchester"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvGameCountTeamTable"
         android:text="1"
+        android:gravity="center"
+        android:paddingStart="4dp"
+        android:paddingEnd="8dp"
+        android:textColor="#F3F3F3"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvGameWinTeamTable"
         android:text="2"
+        android:gravity="center"
+        android:paddingStart="4dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/teal_700"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvGameLostTeamTable"
         android:text="3"
+        android:gravity="center"
+        android:paddingStart="4dp"
+        android:paddingEnd="8dp"
+        android:textColor="#FF8A8A"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvGameDrawTeamTable"
         android:text="4"
+        android:gravity="center"
+        android:paddingStart="4dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvPointTeamTable"
         android:text="4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_width="30dp"
+        android:layout_height="match_parent"
         android:textSize="16sp" />
 
 </LinearLayout>

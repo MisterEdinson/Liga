@@ -4,12 +4,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.decode.SvgDecoder
+import coil.loadAny
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.local.models.LeagueChampGsonModel
@@ -58,7 +58,9 @@ class CupTableAdapter : RecyclerView.Adapter<CupTableAdapter.CupViewHolder>() {
 
         holder.itemView.apply {
             tvGroupTable.text = item.standingsGroup
-            // место для вставки custom view
+            // место для вставки вложенного recyclerView
+            val nestedAdapter = NestedTableAdapter(objectTableList)
+            recyclerViewNested.adapter = nestedAdapter
         }
 
     }
@@ -66,8 +68,39 @@ class CupTableAdapter : RecyclerView.Adapter<CupTableAdapter.CupViewHolder>() {
     override fun getItemCount(): Int {
         return list.currentList.size
     }
+}
+class NestedTableAdapter(
+    private val tableList: List<TableItem>
+    ) : RecyclerView.Adapter<NestedTableAdapter.TableViewHolder>() {
+    class TableViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    private fun ImageView.loadImage(imgUrl: String) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TableViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_cup_group,
+            parent,
+            false)
+        return TableViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: TableViewHolder, position: Int) {
+        val tableItem = tableList[position]
+        holder.itemView.apply {
+            tvPositionTeamTable.text = tableItem.position.toString()
+            tvNameTeamTable.text = tableItem.team?.shortName
+            imgTeamTable.loadImage(tableItem.team?.crest.toString())
+            tvGameCountTeamTable.text = tableItem.playedGames.toString()
+            tvPointTeamTable.text = tableItem.points.toString()
+            tvGameDrawTeamTable.text = tableItem.draw.toString()
+            tvGameLostTeamTable.text = tableItem.lost.toString()
+            tvGameWinTeamTable.text = tableItem.won.toString()
+        }
+    }
+
+    override fun getItemCount(): Int {
+        return tableList.size
+    }
+
+    fun ImageView.loadImage(imgUrl: String) {
         val imageLoader = ImageLoader.Builder(this.context)
             .componentRegistry { add(SvgDecoder(this@loadImage.context)) }
             .build()

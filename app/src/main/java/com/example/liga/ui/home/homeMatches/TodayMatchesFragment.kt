@@ -5,8 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.liga.R
 import com.example.liga.data.network.models.matches.MatchesItem
@@ -14,6 +17,7 @@ import com.example.liga.ui.home.HomeViewModel
 import com.example.liga.ui.home.adapters.MatchDayAdapter
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_today_matches.*
 
 @AndroidEntryPoint
@@ -47,9 +51,12 @@ class TodayMatchesFragment : Fragment() {
                     "Матчи на ближайшие дни",
                     Toast.LENGTH_SHORT
                 ).show()
-
             }
         })
+        tvLabelMatchDayHome.setOnClickListener{
+            val bundle = bundleOf("code" to 4289)
+            findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment,bundle)
+        }
     }
 
     private fun initAdapter() {
