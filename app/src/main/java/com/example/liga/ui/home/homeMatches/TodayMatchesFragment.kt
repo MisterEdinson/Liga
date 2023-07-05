@@ -47,6 +47,7 @@ class TodayMatchesFragment : Fragment() {
                     "Матчи на ближайшие дни",
                     Toast.LENGTH_SHORT
                 ).show()
+
             }
         })
     }
