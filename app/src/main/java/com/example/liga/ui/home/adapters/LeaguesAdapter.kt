@@ -52,11 +52,12 @@ class LeaguesAdapter : RecyclerView.Adapter<LeaguesAdapter.LeaguesViewHolder>() 
             }
             imgLeague.setOnClickListener {
                 val bundle = bundleOf("code" to item.codeCompetition)
-                if (item.typeCompetition == "LEAGUE") {
+                if(item.typeCompetition == "LEAGUE"){
                     findNavController().navigate(R.id.action_homeFragment_to_ligsFragment, bundle)
-                } else {
-                    if(item.codeCompetition == "CL"){
-                        findNavController().navigate(R.id.action_homeFragment_to_cupsFragment, bundle)
+                }else{
+                    when(item.codeCompetition){
+                        "CLI" -> findNavController().navigate(R.id.action_homeFragment_to_cupsFragment, bundle)
+                        "CL" -> findNavController().navigate(R.id.action_homeFragment_to_cupsFragment, bundle)
                     }
                 }
             }

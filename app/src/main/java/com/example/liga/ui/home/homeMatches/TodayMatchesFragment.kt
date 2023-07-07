@@ -42,6 +42,12 @@ class TodayMatchesFragment : Fragment() {
             val stringTable = it.match
             val tableList = gson.fromJson(stringTable, Array<MatchesItem>::class.java)
             adapter?.list?.submitList(tableList.toList())
+
+            if(tableList.toList().isEmpty()){
+                tvTodayMatchesNone.visibility = View.VISIBLE
+            }else{
+                tvTodayMatchesNone.visibility = View.GONE
+            }
         }
         rvHomeDayMatch.setOnTouchListener(object : SwipeHome(view.context) {
             override fun onSwipeRight() {

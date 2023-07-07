@@ -45,6 +45,9 @@ class CupsFragment : Fragment() {
         viewModel.cupsTable.observe(viewLifecycleOwner, Observer{
             adapter?.list?.submitList(it)
         })
+        if(code == "CLI"){
+            cupsFragment.setBackgroundResource(R.drawable.bg_cup_lib)
+        }
     }
     private fun initAdapter(){
         adapter = CupTableAdapter()

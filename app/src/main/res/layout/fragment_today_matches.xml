@@ -34,4 +34,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLabelMatchDayHome" />
 
+    <TextView
+        android:id="@+id/tvTodayMatchesNone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No matches today"
+        android:background="#391A83EA"
+        android:textColor="@color/white"
+        android:fontFamily="@font/bernard"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/rvHomeDayMatch"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabelMatchDayHome" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#651A83EA"
-    android:layout_marginTop="5dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:background="#651A83EA">
 
     <ImageView
         android:id="@+id/imHomeTeam"
@@ -25,9 +24,9 @@
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:paddingStart="5dp"
-        android:textSize="12sp"
         android:text="Command not defined"
         android:textColor="@color/white"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imHomeTeam"
@@ -44,7 +43,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvStatusMatch"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/tvStatusMatch"
+        app:layout_constraintStart_toEndOf="@+id/tvHomeTeam"
         app:layout_constraintTop_toBottomOf="@+id/tvStatusMatch"
         app:layout_constraintVertical_bias="1.0" />
 
@@ -54,9 +53,9 @@
         android:layout_height="match_parent"
         android:gravity="right|center_vertical"
         android:paddingEnd="5dp"
-        android:textSize="12sp"
         android:text="Command not defined"
         android:textColor="@color/white"
+        android:textSize="12sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/imGuestTeam"
         app:layout_constraintEnd_toStartOf="@+id/imGuestTeam"
@@ -83,7 +82,6 @@
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/tvGuestTeam"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/tvHomeTeam"
         app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
