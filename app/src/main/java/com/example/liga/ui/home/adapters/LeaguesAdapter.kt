@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.decode.SvgDecoder
+import coil.load
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.local.models.CompetitonModel
@@ -47,8 +48,12 @@ class LeaguesAdapter : RecyclerView.Adapter<LeaguesAdapter.LeaguesViewHolder>() 
     override fun onBindViewHolder(holder: LeaguesViewHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-            item.emblemCompetition.let {
-                imgLeague.loadImage(it.toString())
+            when(item.idCompetition){
+                2013 -> imgLeague.load(R.drawable.brasil)
+                2018 -> imgLeague.load(R.drawable.logo_euro)
+                else -> {
+                    imgLeague.loadImage(item.emblemCompetition.toString())
+                }
             }
             imgLeague.setOnClickListener {
                 val bundle = bundleOf("code" to item.codeCompetition)
