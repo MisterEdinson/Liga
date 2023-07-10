@@ -21,7 +21,11 @@
             app:destination="@id/teamFragment" />
         <action
             android:id="@+id/action_homeFragmentHab_to_profileFragment2"
-            app:destination="@id/profileFragment2" />
+            app:destination="@id/profileFragment2"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/ligsFragment"
