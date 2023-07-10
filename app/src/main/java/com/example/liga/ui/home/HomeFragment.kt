@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.transition.Visibility
+import androidx.navigation.fragment.findNavController
+import com.example.liga.R
 import com.example.liga.databinding.FragmentHomeBinding
 import com.example.liga.ui.home.adapters.LeaguesAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_today_matches.*
+import kotlinx.android.synthetic.main.fragment_home.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -33,6 +34,10 @@ class HomeFragment : Fragment() {
         initAdapter()
         viewModel.ligsLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
+        }
+
+        btnProfileHome.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragmentHab_to_profileFragment2)
         }
     }
 

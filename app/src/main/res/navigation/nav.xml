@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_homeFragmentHab_to_teamFragment"
             app:destination="@id/teamFragment" />
+        <action
+            android:id="@+id/action_homeFragmentHab_to_profileFragment2"
+            app:destination="@id/profileFragment2" />
     </fragment>
     <fragment
         android:id="@+id/ligsFragment"
@@ -46,5 +49,14 @@
         <action
             android:id="@+id/action_cupsFragment_to_teamFragment"
             app:destination="@id/teamFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment2"
+        android:name="com.example.liga.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment2_to_homeFragmentHab"
+            app:destination="@id/homeFragmentHab" />
     </fragment>
 </navigation>
