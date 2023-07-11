@@ -49,7 +49,7 @@ class MatchDayAdapter : RecyclerView.Adapter<MatchDayAdapter.MatchDayHolder>() {
             tvGuestTeam.text = item.awayTeam?.name
             tvStatusMatch.text = item.status
 
-            val time = TimeConverter().dateConverterDay(item.utcDate)
+            val time = TimeConverter().dateConverterToTime(item.utcDate)
             if(item.status == "TIMED"){
                 tvTotalMatch.text = time
             }

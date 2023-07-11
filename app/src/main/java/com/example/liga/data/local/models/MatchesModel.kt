@@ -3,8 +3,8 @@ package com.example.liga.data.local.models
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "league_all_matches")
-data class MatchesAllSave (
+@Entity(tableName = "matches_table")
+data class MatchesModel (
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0,
     var idMatch:Int? = null,
@@ -27,7 +27,7 @@ data class MatchesAllSave (
     var startDateSeason:String? = null,
     var endDateSeason:String? = null,
     var currentMatchdaySeason:Int? = null,
-    var winnerSeason:Any? = null,
+    var winnerSeason:String? = null,
     var idHomeTeam:Int? = null,
     var nameHomeTeam:String? = null,
     var shortHomeTeam:String? = null,
@@ -44,4 +44,7 @@ data class MatchesAllSave (
     var fullTimeAwayScore:Int? = null,
     var halfTimeHomeScore:Int? = null,
     var halfTimeAwayScore:Int? = null,
+    var dateMatch:String? = null,
+    var timeMatch:String? = null,
+    var dateUpdate:String? = null,
     )

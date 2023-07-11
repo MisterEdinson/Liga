@@ -5,6 +5,7 @@ import androidx.room.Room
 import com.example.liga.data.local.LigaDao
 import com.example.liga.data.local.dao.ChampionshipDao
 import com.example.liga.data.local.dao.CompetitionDao
+import com.example.liga.data.local.dao.MatchesDao
 import com.example.liga.data.local.dao.TeamDao
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.utils.Constants.Companion.BASE_URL
@@ -70,5 +71,10 @@ object ApplicationModule {
     @Provides
     fun provideTeam(appDataBase: LigaDao): TeamDao {
         return appDataBase.Team()
+    }
+
+    @Provides
+    fun provideMatch(appDataBase: LigaDao): MatchesDao {
+        return appDataBase.Matches()
     }
 }

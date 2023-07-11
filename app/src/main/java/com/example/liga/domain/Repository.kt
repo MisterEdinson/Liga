@@ -2,6 +2,7 @@ package com.example.liga.domain
 
 import com.example.liga.data.local.dao.ChampionshipDao
 import com.example.liga.data.local.dao.CompetitionDao
+import com.example.liga.data.local.dao.MatchesDao
 import com.example.liga.data.local.dao.TeamDao
 import com.example.liga.data.local.models.*
 import com.example.liga.data.network.SimpleRetro
@@ -12,7 +13,8 @@ class Repository @Inject constructor(
     private val retrofit: SimpleRetro,
     private val daoCompetition: CompetitionDao,
     private val daoChampionship: ChampionshipDao,
-    private val daoTeam: TeamDao
+    private val daoTeam: TeamDao,
+    private val daoMatches: MatchesDao
 ) {
     //get competitions
     suspend fun getLeagues(): List<CompetitonModel> {
@@ -66,9 +68,10 @@ class Repository @Inject constructor(
     }
 
     //get immediate matchday
-    suspend fun getMatchImmediate(dateTo:String,dateFrom:String): List<MatchesAllSave> {
+    suspend fun getMatchImmediate(dateTo:String,dateFrom:String): List<MatchesModel> {
         val matchImmediateNet = retrofit.getMatchImmediate(dateTo,dateFrom)
         val map = MappingAllMatch().convertedMatch(matchImmediateNet)
+        daoMatches.insertMatches(map)
         return map
     }
 }

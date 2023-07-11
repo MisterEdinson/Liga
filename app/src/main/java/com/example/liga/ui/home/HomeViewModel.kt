@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.liga.data.local.models.CompetitonModel
-import com.example.liga.data.local.models.MatchesAllSave
+import com.example.liga.data.local.models.MatchesModel
 import com.example.liga.data.local.models.MatchesDaoModel
 import com.example.liga.domain.Repository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     val ligsLiveData: MutableLiveData<List<CompetitonModel>> = MutableLiveData()
     val matchDayLiveData: MutableLiveData<MatchesDaoModel> = MutableLiveData()
-    val matchImmediateLiveData: MutableLiveData<List<MatchesAllSave>> = MutableLiveData()
+    val matchImmediateLiveData: MutableLiveData<List<MatchesModel>> = MutableLiveData()
 
     init {
         getCompetitions()

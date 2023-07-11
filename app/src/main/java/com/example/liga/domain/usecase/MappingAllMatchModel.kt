@@ -1,11 +1,13 @@
 package com.example.liga.domain.usecase
 
-import com.example.liga.data.local.models.MatchesAllSave
+import com.example.liga.data.local.models.MatchesModel
 import com.example.liga.data.network.models.matches.MatchesItem
+import com.example.liga.domain.utils.TimeConverter
+import java.util.Date
 
 class MappingAllMatchModel {
-    fun mappingMatchFromRoom(model: MatchesItem?): MatchesAllSave {
-        return MatchesAllSave(
+    fun mappingMatchFromRoom(model: MatchesItem?): MatchesModel {
+        return MatchesModel(
             id = 0,
             idMatch = model?.id,
             utcDateMatch = model?.utcDate,
@@ -27,7 +29,7 @@ class MappingAllMatchModel {
             startDateSeason = model?.season?.startDate,
             endDateSeason = model?.season?.endDate,
             currentMatchdaySeason = model?.season?.currentMatchday,
-            winnerSeason = model?.season?.winner,
+            winnerSeason = model?.season?.winner.toString(),
             idHomeTeam = model?.homeTeam?.id,
             nameHomeTeam = model?.homeTeam?.name,
             shortHomeTeam = model?.homeTeam?.shortName,
@@ -44,6 +46,9 @@ class MappingAllMatchModel {
             fullTimeAwayScore = model?.score?.fullTime?.away,
             halfTimeHomeScore = model?.score?.halfTime?.home,
             halfTimeAwayScore = model?.score?.halfTime?.away,
+            dateMatch = TimeConverter().dateConverterToDate(model?.utcDate),
+            timeMatch = TimeConverter().dateConverterToTime(model?.utcDate),
+            dateUpdate = Date().toString(),
         )
     }
 }

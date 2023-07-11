@@ -13,18 +13,18 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
-import com.example.liga.data.local.models.MatchesAllSave
+import com.example.liga.data.local.models.MatchesModel
 import com.example.liga.domain.utils.TimeConverter
 import kotlinx.android.synthetic.main.item_match.view.*
 
 class ImmediateMatchAdapter : RecyclerView.Adapter<ImmediateMatchAdapter.ImmediateHoleder>() {
 
-    private val callback = object : DiffUtil.ItemCallback<MatchesAllSave>() {
-        override fun areItemsTheSame(oldItem: MatchesAllSave, newItem: MatchesAllSave): Boolean {
+    private val callback = object : DiffUtil.ItemCallback<MatchesModel>() {
+        override fun areItemsTheSame(oldItem: MatchesModel, newItem: MatchesModel): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: MatchesAllSave, newItem: MatchesAllSave): Boolean {
+        override fun areContentsTheSame(oldItem: MatchesModel, newItem: MatchesModel): Boolean {
             return oldItem.id == newItem.id
         }
     }
@@ -49,7 +49,7 @@ class ImmediateMatchAdapter : RecyclerView.Adapter<ImmediateMatchAdapter.Immedia
             tvHomeTeam.text = item.nameHomeTeam
 
             tvStatusMatch.text = item.statusMatch
-            val time = TimeConverter().dateConverterDay(item.utcDateMatch)
+            val time = TimeConverter().dateConverterToTime(item.utcDateMatch)
 
             when(item.statusMatch){
                 "TIMED" -> tvTotalMatch.text = time

@@ -9,8 +9,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 class TimeConverter {
-    fun dateConverterDay(utcDateTime: String?): String {
-
+    fun dateConverterToTime(utcDateTime: String?): String {
         val utcFormatter =
             DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
         val utcDate = LocalDateTime.parse(utcDateTime, utcFormatter)
@@ -26,8 +25,23 @@ class TimeConverter {
         return kazakhstanZoned.format(formatter)
     }
 
-    fun getDayImmediate(today:Date, dayPlus:Int):String{
+    fun dateConverterToDate(utcDateTime: String?): String {
+        val utcFormatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        val utcDate = LocalDateTime.parse(utcDateTime, utcFormatter)
+        val utcZone = ZoneId.of("UTC")
+        val utcZoned = ZonedDateTime.of(utcDate, utcZone)
 
+        // Format date to zone +5
+        val kazakhstanZone = ZoneId.of("Asia/Aqtobe")
+        val kazakhstanZoned = utcZoned.withZoneSameInstant(kazakhstanZone)
+
+        // Format to String "HH:mm"
+        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.getDefault())
+        return kazakhstanZoned.format(formatter)
+    }
+
+    fun getDayImmediate(today: Date, dayPlus: Int): String {
         val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         val calendar = Calendar.getInstance()
         calendar.time = today
