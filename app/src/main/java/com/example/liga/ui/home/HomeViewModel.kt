@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val repository: Repository) : ViewModel() {
     val ligsLiveData: MutableLiveData<List<CompetitonModel>> = MutableLiveData()
-    val matchDayLiveData: MutableLiveData<MatchesDaoModel> = MutableLiveData()
+    val matchDayLiveData: MutableLiveData<List<MatchesModel>> = MutableLiveData()
     val matchImmediateLiveData: MutableLiveData<List<MatchesModel>> = MutableLiveData()
 
     init {
@@ -36,9 +36,9 @@ class HomeViewModel @Inject constructor(private val repository: Repository) : Vi
         }
     }
 
-    fun getImmediateDay(dateTo:String, dateFrom:String){
+    fun getImmediateDay(){
         viewModelScope.launch {
-            val response = repository.getMatchImmediate(dateTo,dateFrom)
+            val response = repository.getMatchImmediate()
             matchImmediateLiveData.value = response
         }
     }

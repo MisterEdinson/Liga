@@ -50,6 +50,12 @@ class TimeConverter {
         val immediateDay = dateFormat.format(newDate)
 
         return immediateDay
+    }
 
+    fun getConvertNowDate():String{
+        val currentDate = Date()
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
+        val formattedDate = dateFormat.format(currentDate)
+        return formattedDate
     }
 }

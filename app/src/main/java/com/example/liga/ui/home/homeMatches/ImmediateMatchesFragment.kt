@@ -31,11 +31,11 @@ class ImmediateMatchesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val currentDate = Date()
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val today = dateFormat.format(currentDate)
-        val dayImmediate = TimeConverter().getDayImmediate(currentDate, IMMEDIATE_DAY)
-        viewModel.getImmediateDay(today, dayImmediate)
+//        val currentDate = Date()
+//        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+//        val today = dateFormat.format(currentDate)
+//        val dayImmediate = TimeConverter().getDayImmediate(currentDate, IMMEDIATE_DAY)
+        viewModel.getImmediateDay()
         return inflater.inflate(R.layout.fragment_immediate_matches, container, false)
     }
 

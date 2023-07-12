@@ -7,6 +7,11 @@ import com.example.liga.data.local.dao.TeamDao
 import com.example.liga.data.local.models.*
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.usecase.*
+import com.example.liga.domain.utils.Constants
+import com.example.liga.domain.utils.TimeConverter
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 class Repository @Inject constructor(
@@ -61,17 +66,27 @@ class Repository @Inject constructor(
     }
 
     //get matchday
-    suspend fun getMatchDay(): MatchesDaoModel {
-        val matchDayNet = retrofit.getMatchDay()
-        val map = MapperMatchDay().mappingMatchToDaoModel(matchDayNet)
-        return map
+    suspend fun getMatchDay(): List<MatchesModel> {
+        val currentDate = Date()
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val today = dateFormat.format(currentDate)
+        val dayMatchesRoom = daoMatches.getMatchesDay(today)
+//        val matchDayNet = retrofit.getMatchDay()
+//        val map = MapperMatchDay().mappingMatchToDaoModel(matchDayNet)
+        return dayMatchesRoom
     }
 
     //get immediate matchday
-    suspend fun getMatchImmediate(dateTo:String,dateFrom:String): List<MatchesModel> {
-        val matchImmediateNet = retrofit.getMatchImmediate(dateTo,dateFrom)
-        val map = MappingAllMatch().convertedMatch(matchImmediateNet)
-        daoMatches.insertMatches(map)
-        return map
+    suspend fun getMatchImmediate(): List<MatchesModel> {
+        val currentDate = Date()
+        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val today = dateFormat.format(currentDate)
+        //val dayImmediate = TimeConverter().getDayImmediate(currentDate, Constants.IMMEDIATE_DAY)
+
+//        val matchImmediateNet = retrofit.getMatchImmediate(today,dayImmediate)
+//        val map = MappingAllMatch().convertedMatch(matchImmediateNet)
+//        daoMatches.insertMatches(map)
+        val immediateMatchesRoom = daoMatches.getMatchesImmediate(today)
+        return immediateMatchesRoom
     }
 }

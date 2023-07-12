@@ -11,6 +11,7 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
+import com.example.liga.data.local.models.MatchesModel
 import com.example.liga.data.network.models.matches.MatchesItem
 import com.example.liga.domain.utils.TimeConverter
 import kotlinx.android.synthetic.main.item_match.view.*
@@ -20,14 +21,14 @@ class MatchDayAdapter : RecyclerView.Adapter<MatchDayAdapter.MatchDayHolder>() {
 
     class MatchDayHolder(view: View) : RecyclerView.ViewHolder(view)
 
-    private val callback = object : DiffUtil.ItemCallback<MatchesItem>() {
-        override fun areItemsTheSame(oldItem: MatchesItem, newItem: MatchesItem): Boolean {
+    private val callback = object : DiffUtil.ItemCallback<MatchesModel>() {
+        override fun areItemsTheSame(oldItem: MatchesModel, newItem: MatchesModel): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: MatchesItem,
-            newItem: MatchesItem
+            oldItem: MatchesModel,
+            newItem: MatchesModel
         ): Boolean {
             return oldItem.id == newItem.id
         }
@@ -43,18 +44,18 @@ class MatchDayAdapter : RecyclerView.Adapter<MatchDayAdapter.MatchDayHolder>() {
     override fun onBindViewHolder(holder: MatchDayHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-            imHomeTeam.loadImage(item.homeTeam?.crest.toString())
-            imGuestTeam.loadImage(item.awayTeam?.crest.toString())
-            tvHomeTeam.text = item.homeTeam?.name
-            tvGuestTeam.text = item.awayTeam?.name
-            tvStatusMatch.text = item.status
+            imHomeTeam.loadImage(item.crestHomeTeam.toString())
+            imGuestTeam.loadImage(item.crestAwayTeam.toString())
+            tvHomeTeam.text = item.nameHomeTeam
+            tvGuestTeam.text = item.nameAwayTeam
+            tvStatusMatch.text = item.statusMatch
 
-            val time = TimeConverter().dateConverterToTime(item.utcDate)
-            if(item.status == "TIMED"){
+            val time = TimeConverter().dateConverterToTime(item.utcDateMatch)
+            if(item.statusMatch == "TIMED"){
                 tvTotalMatch.text = time
             }
-            if(item.status == "FINISHED"){
-                tvTotalMatch.text = "${item.score?.fullTime?.home}:${item.score?.fullTime?.away}"
+            if(item.statusMatch == "FINISHED"){
+                tvTotalMatch.text = "${item.fullTimeHomeScore}:${item.fullTimeAwayScore}"
                 tvTotalMatch.typeface.isBold
             }
         }

@@ -1,9 +1,10 @@
 package com.example.liga.data.local.models
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "matches_table")
+@Entity(tableName = "matches_table" , indices = [Index(value = ["idMatch"], unique = true)])
 data class MatchesModel (
     @PrimaryKey(autoGenerate = true)
     var id:Int = 0,

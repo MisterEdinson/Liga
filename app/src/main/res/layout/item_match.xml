@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
-    android:background="#651A83EA">
+    android:background="#850A66C1">
 
     <ImageView
         android:id="@+id/imHomeTeam"
@@ -43,9 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvStatusMatch"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/tvHomeTeam"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatusMatch"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/tvHomeTeam" />
 
     <TextView
         android:id="@+id/tvGuestTeam"
@@ -81,6 +80,7 @@
         android:text="@string/status"
         android:textColor="@color/white"
         android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvTotalMatch"
         app:layout_constraintEnd_toStartOf="@+id/tvGuestTeam"
         app:layout_constraintStart_toEndOf="@+id/tvHomeTeam"
         app:layout_constraintTop_toTopOf="parent" />

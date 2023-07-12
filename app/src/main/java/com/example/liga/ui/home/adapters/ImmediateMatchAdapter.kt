@@ -1,10 +1,12 @@
 package com.example.liga.ui.home.adapters
 
+import android.app.ActionBar.LayoutParams
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.os.bundleOf
+import androidx.core.view.marginTop
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -54,7 +56,12 @@ class ImmediateMatchAdapter : RecyclerView.Adapter<ImmediateMatchAdapter.Immedia
             when(item.statusMatch){
                 "TIMED" -> tvTotalMatch.text = time
                 "FINISHED" -> tvTotalMatch.text = "${item.fullTimeHomeScore}:${item.fullTimeAwayScore}"
-                "POSTPONED" -> tvTotalMatch.visibility = View.INVISIBLE
+                "POSTPONED" -> {
+                    tvTotalMatch.visibility = View.GONE
+                    val layoutParam = tvStatusMatch.layoutParams as ViewGroup.MarginLayoutParams
+                    layoutParam.topMargin = 0
+                    tvStatusMatch.layoutParams
+                }
             }
 
             if (item.crestAwayTeam?.isNotEmpty() == true) {

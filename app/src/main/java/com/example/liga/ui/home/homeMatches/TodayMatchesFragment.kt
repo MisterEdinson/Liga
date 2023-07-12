@@ -38,12 +38,12 @@ class TodayMatchesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         viewModel.matchDayLiveData.observe(viewLifecycleOwner) {
-            val gson = Gson()
-            val stringTable = it.match
-            val tableList = gson.fromJson(stringTable, Array<MatchesItem>::class.java)
-            adapter?.list?.submitList(tableList.toList())
+//            val gson = Gson()
+//            val stringTable = it.match
+//            val tableList = gson.fromJson(stringTable, Array<MatchesItem>::class.java)
+            adapter?.list?.submitList(it)
 
-            if(tableList.toList().isEmpty()){
+            if(it.isEmpty()){
                 tvTodayMatchesNone.visibility = View.VISIBLE
             }else{
                 tvTodayMatchesNone.visibility = View.GONE
@@ -70,3 +70,4 @@ class TodayMatchesFragment : Fragment() {
         rvHomeDayMatch.adapter = adapter
     }
 }
+
