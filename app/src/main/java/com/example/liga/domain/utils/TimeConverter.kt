@@ -41,21 +41,14 @@ class TimeConverter {
         return kazakhstanZoned.format(formatter)
     }
 
-    fun getDayImmediate(today: Date, dayPlus: Int): String {
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val calendar = Calendar.getInstance()
-        calendar.time = today
-        calendar.add(Calendar.DAY_OF_MONTH, dayPlus)
-        val newDate = calendar.time
-        val immediateDay = dateFormat.format(newDate)
+    fun getConvertRecycler(utcDate:String?):String{
+        val utcFormatter =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault())
+        val utcDate = LocalDateTime.parse(utcDate, utcFormatter)
+        val utcZone = ZoneId.of("UTC")
+        val utcZoned = ZonedDateTime.of(utcDate, utcZone)
 
-        return immediateDay
-    }
-
-    fun getConvertNowDate():String{
-        val currentDate = Date()
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd")
-        val formattedDate = dateFormat.format(currentDate)
-        return formattedDate
+        val formatter = DateTimeFormatter.ofPattern("dd/MM", Locale.getDefault())
+        return utcZoned.format(formatter)
     }
 }

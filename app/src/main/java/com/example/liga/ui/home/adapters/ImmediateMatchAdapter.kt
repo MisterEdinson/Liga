@@ -51,10 +51,12 @@ class ImmediateMatchAdapter : RecyclerView.Adapter<ImmediateMatchAdapter.Immedia
             tvHomeTeam.text = item.nameHomeTeam
 
             tvStatusMatch.text = item.statusMatch
-            val time = TimeConverter().dateConverterToTime(item.utcDateMatch)
+//            val time = TimeConverter().dateConverterToTime(item.utcDateMatch)
 
             when(item.statusMatch){
-                "TIMED" -> tvTotalMatch.text = time
+                "TIMED" ->  {
+                    tvTotalMatch.text = TimeConverter().getConvertRecycler(item.utcDateMatch)
+                }
                 "FINISHED" -> tvTotalMatch.text = "${item.fullTimeHomeScore}:${item.fullTimeAwayScore}"
                 "POSTPONED" -> {
                     tvTotalMatch.visibility = View.GONE
