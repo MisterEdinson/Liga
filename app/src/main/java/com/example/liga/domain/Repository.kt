@@ -1,13 +1,11 @@
 package com.example.liga.domain
 
-import com.example.liga.data.local.dao.ChampionshipDao
-import com.example.liga.data.local.dao.CompetitionDao
-import com.example.liga.data.local.dao.MatchesDao
-import com.example.liga.data.local.dao.TeamDao
+import com.example.liga.data.local.dao.*
 import com.example.liga.data.local.models.*
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.usecase.*
 import com.example.liga.domain.utils.Constants
+import com.example.liga.domain.utils.TimeComparison
 import com.example.liga.domain.utils.TimeConverter
 import java.text.DateFormat
 import java.text.SimpleDateFormat
@@ -19,7 +17,8 @@ class Repository @Inject constructor(
     private val daoCompetition: CompetitionDao,
     private val daoChampionship: ChampionshipDao,
     private val daoTeam: TeamDao,
-    private val daoMatches: MatchesDao
+    private val daoMatches: MatchesDao,
+    private val daoUpdate: UpdateDao
 ) {
     //get competitions
     suspend fun getLeagues(): List<CompetitonModel> {
@@ -67,10 +66,7 @@ class Repository @Inject constructor(
 
     //get matchday
     suspend fun getMatchDay(): List<MatchesModel> {
-        val currentDate = Date()
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val today = dateFormat.format(currentDate)
-        val dayMatchesRoom = daoMatches.getMatchesDay(today)
+        val dayMatchesRoom = daoMatches.getMatchesDay(TimeConverter().getYYYYMMDDfromDate())
 //        val matchDayNet = retrofit.getMatchDay()
 //        val map = MapperMatchDay().mappingMatchToDaoModel(matchDayNet)
         return dayMatchesRoom
@@ -78,15 +74,13 @@ class Repository @Inject constructor(
 
     //get immediate matchday
     suspend fun getMatchImmediate(): List<MatchesModel> {
-        val currentDate = Date()
-        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val today = dateFormat.format(currentDate)
-        //val dayImmediate = TimeConverter().getDayImmediate(currentDate, Constants.IMMEDIATE_DAY)
 
-//        val matchImmediateNet = retrofit.getMatchImmediate(today,dayImmediate)
-//        val map = MappingAllMatch().convertedMatch(matchImmediateNet)
-//        daoMatches.insertMatches(map)
-        val immediateMatchesRoom = daoMatches.getMatchesImmediate(today)
+        val immediateMatchesRoom = daoMatches.getMatchesImmediate(TimeConverter().getYYYYMMDDfromDate())
+
+        //val dayImmediate = TimeConverter().getDayImmediate(currentDate, Constants.IMMEDIATE_DAY)
+        //val matchImmediateNet = retrofit.getMatchImmediate(today,dayImmediate)
+        //val map = MappingAllMatch().convertedMatch(matchImmediateNet)
+        //daoMatches.insertMatches(map)
         return immediateMatchesRoom
     }
 }
