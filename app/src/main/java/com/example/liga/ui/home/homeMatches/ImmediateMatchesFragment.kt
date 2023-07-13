@@ -39,6 +39,9 @@ class ImmediateMatchesFragment : Fragment() {
         initAdapter()
         viewModel.matchImmediateLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
+            if(it.isNotEmpty()){
+                pbMatchImmediate.visibility = View.INVISIBLE
+            }
         }
 
         rvHomeImmediateMatch.setOnTouchListener(object : SwipeHome(view.context) {

@@ -40,7 +40,7 @@ class TodayMatchesFragment : Fragment() {
         viewModel.getMatchDay()
         viewModel.matchDayLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
-
+            pbMatchToDay.visibility = View.INVISIBLE
             if(it.isEmpty()){
                 tvTodayMatchesNone.visibility = View.VISIBLE
             }else{

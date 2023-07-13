@@ -1,10 +1,11 @@
 package com.example.liga.data.local.models
 
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.io.Serializable
 
-@Entity(tableName = "competitions")
+@Entity(tableName = "competitions" , indices = [Index(value = ["idCompetition"], unique = true)])
 data class CompetitonModel(
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0,
