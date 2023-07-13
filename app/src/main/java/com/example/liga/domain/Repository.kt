@@ -4,8 +4,11 @@ import com.example.liga.data.local.dao.*
 import com.example.liga.data.local.models.*
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.usecase.*
+import com.example.liga.domain.utils.Constants.Companion.DIVISION_HOUR
 import com.example.liga.domain.utils.Constants.Companion.DIVISION_SEC
+import com.example.liga.domain.utils.Constants.Companion.IMMEDIATE_DAY
 import com.example.liga.domain.utils.Constants.Companion.UPDATE_MATCH_DAY_SEC
+import com.example.liga.domain.utils.Constants.Companion.UPDATE_TIME_HOUR
 import com.example.liga.domain.utils.TimeConverter
 import java.util.*
 import javax.inject.Inject
@@ -86,13 +89,25 @@ class Repository @Inject constructor(
 
     //get immediate matchday
     suspend fun getMatchImmediate(): List<MatchesModel> {
-        val immediateMatchesRoom =
+        val update = daoUpdate?.getUpdateTable()
+        val hour = Date().time / DIVISION_HOUR
+        return if (update?.updateMatchIm != null && update.updateMatchIm - hour < UPDATE_TIME_HOUR) {
             daoMatches.getMatchesImmediate(TimeConverter().getYYYYMMDDfromDate())
-
-        //val dayImmediate = TimeConverter().getDayImmediate(currentDate, Constants.IMMEDIATE_DAY)
-        //val matchImmediateNet = retrofit.getMatchImmediate(today,dayImmediate)
-        //val map = MappingAllMatch().convertedMatch(matchImmediateNet)
-        //daoMatches.insertMatches(map)
-        return immediateMatchesRoom
+        } else {
+            val matchImmediateNet = retrofit.getMatchImmediate(
+                TimeConverter().getYYYYMMDDfromDate(),
+                TimeConverter().getDayImmediate(IMMEDIATE_DAY)
+            )
+            val map = MappingAllMatch().convertedMatch(matchImmediateNet)
+            daoMatches.insertMatches(map)
+            val table = UpdateDateModel(
+                id = 0,
+                updateComp = update?.updateComp,
+                updateMatchesDay = update?.updateMatchesDay,
+                updateMatchIm = hour
+            )
+            daoUpdate?.insertUpdateTable(table)
+            daoMatches.getMatchesImmediate(TimeConverter().getYYYYMMDDfromDate())
+        }
     }
 }
