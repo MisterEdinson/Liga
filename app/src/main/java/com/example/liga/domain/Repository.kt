@@ -4,11 +4,9 @@ import com.example.liga.data.local.dao.*
 import com.example.liga.data.local.models.*
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.usecase.*
-import com.example.liga.domain.utils.Constants
-import com.example.liga.domain.utils.TimeComparison
+import com.example.liga.domain.utils.Constants.Companion.DIVISION_SEC
+import com.example.liga.domain.utils.Constants.Companion.UPDATE_MATCH_DAY_SEC
 import com.example.liga.domain.utils.TimeConverter
-import java.text.DateFormat
-import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -18,7 +16,7 @@ class Repository @Inject constructor(
     private val daoChampionship: ChampionshipDao,
     private val daoTeam: TeamDao,
     private val daoMatches: MatchesDao,
-    private val daoUpdate: UpdateDao
+    private val daoUpdate: UpdateDao?
 ) {
     //get competitions
     suspend fun getLeagues(): List<CompetitonModel> {
@@ -66,16 +64,30 @@ class Repository @Inject constructor(
 
     //get matchday
     suspend fun getMatchDay(): List<MatchesModel> {
-        val dayMatchesRoom = daoMatches.getMatchesDay(TimeConverter().getYYYYMMDDfromDate())
-//        val matchDayNet = retrofit.getMatchDay()
-//        val map = MapperMatchDay().mappingMatchToDaoModel(matchDayNet)
-        return dayMatchesRoom
+        val update = daoUpdate?.getUpdateTable()
+        val sec = Date().time / DIVISION_SEC
+        //logic update
+        return if (update?.updateMatchesDay != null && (sec - update.updateMatchesDay < UPDATE_MATCH_DAY_SEC)) {
+            daoMatches.getMatchesDay(TimeConverter().getYYYYMMDDfromDate())
+        } else {
+            val matchDayNet = retrofit.getMatchDay()
+            val map = MappingAllMatch().convertedMatch(matchDayNet)
+            daoMatches.insertMatches(map)
+            val table = UpdateDateModel(
+                id = 0,
+                updateComp = update?.updateComp,
+                updateMatchesDay = sec,
+                updateMatchIm = update?.updateMatchIm
+            )
+            daoUpdate?.insertUpdateTable(table)
+            daoMatches.getMatchesDay(TimeConverter().getYYYYMMDDfromDate())
+        }
     }
 
     //get immediate matchday
     suspend fun getMatchImmediate(): List<MatchesModel> {
-
-        val immediateMatchesRoom = daoMatches.getMatchesImmediate(TimeConverter().getYYYYMMDDfromDate())
+        val immediateMatchesRoom =
+            daoMatches.getMatchesImmediate(TimeConverter().getYYYYMMDDfromDate())
 
         //val dayImmediate = TimeConverter().getDayImmediate(currentDate, Constants.IMMEDIATE_DAY)
         //val matchImmediateNet = retrofit.getMatchImmediate(today,dayImmediate)

@@ -19,17 +19,16 @@ class HomeViewModel @Inject constructor(private val repository: Repository) : Vi
 
     init {
         getCompetitions()
-        getMatchDay()
     }
 
-    private fun getCompetitions() {
+    fun getCompetitions() {
         viewModelScope.launch {
             val responce = repository.getLeagues()
             ligsLiveData.value = responce
         }
     }
 
-    private fun getMatchDay() {
+    fun getMatchDay() {
         viewModelScope.launch {
             val response = repository.getMatchDay()
             matchDayLiveData.value = response

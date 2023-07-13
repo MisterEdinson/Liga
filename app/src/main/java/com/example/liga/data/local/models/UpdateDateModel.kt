@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class UpdateDateModel(
     @PrimaryKey(autoGenerate = false)
     val id:Int? = 0,
-    val updateComp:String? = null,
-    val updateMatchesDay:String? = null,
-    val updateMatchIm:String? = null
+    val updateComp:Long? = null,
+    val updateMatchesDay:Long? = null,
+    val updateMatchIm:Long? = null
 )

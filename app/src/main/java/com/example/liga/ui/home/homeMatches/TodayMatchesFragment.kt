@@ -37,10 +37,8 @@ class TodayMatchesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        viewModel.getMatchDay()
         viewModel.matchDayLiveData.observe(viewLifecycleOwner) {
-//            val gson = Gson()
-//            val stringTable = it.match
-//            val tableList = gson.fromJson(stringTable, Array<MatchesItem>::class.java)
             adapter?.list?.submitList(it)
 
             if(it.isEmpty()){
@@ -54,7 +52,7 @@ class TodayMatchesFragment : Fragment() {
                 findNavController().navigate(R.id.action_todayMatchesFragment_to_immediateMatchesFragment)
                 Toast.makeText(
                     context,
-                    "Матчи на ближайшие дни",
+                    "Matches for the coming days",
                     Toast.LENGTH_SHORT
                 ).show()
             }

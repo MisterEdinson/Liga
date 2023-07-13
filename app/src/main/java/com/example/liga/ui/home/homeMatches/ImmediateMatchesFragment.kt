@@ -30,11 +30,6 @@ class ImmediateMatchesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-//        val currentDate = Date()
-//        val dateFormat: DateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-//        val today = dateFormat.format(currentDate)
-//        val dayImmediate = TimeConverter().getDayImmediate(currentDate, IMMEDIATE_DAY)
         viewModel.getImmediateDay()
         return inflater.inflate(R.layout.fragment_immediate_matches, container, false)
     }
@@ -51,7 +46,7 @@ class ImmediateMatchesFragment : Fragment() {
                 findNavController().navigate(R.id.action_immediateMatchesFragment_to_todayMatchesFragment)
                 Toast.makeText(
                     context,
-                    "Матчи на сегодня",
+                    "Matches for today",
                     Toast.LENGTH_SHORT
                 ).show()
             }
