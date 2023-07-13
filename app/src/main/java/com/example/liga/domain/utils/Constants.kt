@@ -11,6 +11,7 @@ class Constants {
         const val UPDATE_MINUTS = 30
         const val UPDATE_TIME_HOUR = 12
         const val UPDATE_TIME_DAYS = 30
+        const val UPDATE_TIME_MOUNT = 6
 
         const val DIVISION_SEC = 1000
         const val DIVISION_MIN = 60000

@@ -5,10 +5,12 @@ import com.example.liga.data.local.models.*
 import com.example.liga.data.network.SimpleRetro
 import com.example.liga.domain.usecase.*
 import com.example.liga.domain.utils.Constants.Companion.DIVISION_HOUR
+import com.example.liga.domain.utils.Constants.Companion.DIVISION_MOUNT
 import com.example.liga.domain.utils.Constants.Companion.DIVISION_SEC
 import com.example.liga.domain.utils.Constants.Companion.IMMEDIATE_DAY
 import com.example.liga.domain.utils.Constants.Companion.UPDATE_MATCH_DAY_SEC
 import com.example.liga.domain.utils.Constants.Companion.UPDATE_TIME_HOUR
+import com.example.liga.domain.utils.Constants.Companion.UPDATE_TIME_MOUNT
 import com.example.liga.domain.utils.TimeConverter
 import java.util.*
 import javax.inject.Inject
@@ -16,31 +18,41 @@ import javax.inject.Inject
 class Repository @Inject constructor(
     private val retrofit: SimpleRetro,
     private val daoCompetition: CompetitionDao,
-    private val daoChampionship: ChampionshipDao,
+    private val daoChampionship: ChampionshipDao?,
     private val daoTeam: TeamDao,
     private val daoMatches: MatchesDao,
     private val daoUpdate: UpdateDao?
 ) {
     //get competitions
     suspend fun getLeagues(): List<CompetitonModel> {
-        val infoUpdate = daoCompetition.getCompetition()
-        return infoUpdate.ifEmpty {
+        val update = daoUpdate?.getUpdateTable()
+        val mount = Date().time / DIVISION_MOUNT
+        return if (update?.updateComp != null && update.updateComp - mount < UPDATE_TIME_MOUNT) {
+            daoCompetition.getCompetition()
+        } else {
             val leagues = retrofit.getCompetitions()
             val correctLeagues = MappingCompetitionHost().convertingCompetition(leagues)
             daoCompetition.insertCompetition(correctLeagues)
+            val table = UpdateDateModel(
+                id = 0,
+                updateComp = mount,
+                updateMatchesDay = update?.updateMatchesDay,
+                updateMatchIm = update?.updateMatchIm
+            )
+            daoUpdate?.insertUpdateTable(table)
             correctLeagues
         }
     }
 
     //get championship
     suspend fun getLeagueChampionship(code: String): LeagueInfoModel {
-        val localChampionship = daoChampionship.getChampionship(code)
+        val localChampionship = daoChampionship?.getChampionship(code)
         return if (localChampionship != null) {
             localChampionship
         } else {
             val league = retrofit.getLeagueTable(code)
             val leagueInfo = MappingLeagueInfo().convertedToLeagueInfo(league)
-            daoChampionship.insertChampionship(leagueInfo)
+            daoChampionship?.insertChampionship(leagueInfo)
             leagueInfo
         }
     }
@@ -87,7 +99,7 @@ class Repository @Inject constructor(
         }
     }
 
-    //get immediate matchday
+    //get immediate matches
     suspend fun getMatchImmediate(): List<MatchesModel> {
         val update = daoUpdate?.getUpdateTable()
         val hour = Date().time / DIVISION_HOUR
