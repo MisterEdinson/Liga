@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "864359178417",
+    "project_id": "football-fun-6daf9",
+    "storage_bucket": "football-fun-6daf9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864359178417:android:d4cea8d163ce3745030290",
+        "android_client_info": {
+          "package_name": "com.example.liga"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864359178417-me6t2pbt3b6bo86cc1vvlf14h5i6rjkc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAClkGgWlPWQRcf7k05UN0w-rzuNwYJWn8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864359178417-me6t2pbt3b6bo86cc1vvlf14h5i6rjkc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
