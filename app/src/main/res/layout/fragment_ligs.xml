@@ -15,7 +15,7 @@
         android:layout_height="150dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/premier"
+        tools:src="@drawable/premier"
         android:background="@color/white"
         android:padding="8dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
         android:layout_width="40dp"
         android:layout_height="35dp"
         android:layout_marginStart="16dp"
-        android:src="@drawable/flag"
+        tools:src="@drawable/flag"
         app:layout_constraintBottom_toBottomOf="@+id/tvLeagueCountry"
         app:layout_constraintStart_toEndOf="@+id/tvLeagueCountry"
         app:layout_constraintTop_toTopOf="@+id/tvLeagueCountry" />
