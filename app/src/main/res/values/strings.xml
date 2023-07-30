@@ -38,4 +38,6 @@
     <string name="email">Email</string>
     <string name="registration_profile">Registration profile:</string>
     <string name="sign_in">Sign In</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>

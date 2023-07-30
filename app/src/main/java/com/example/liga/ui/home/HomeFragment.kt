@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -13,6 +14,7 @@ import com.example.liga.ui.dialogs.DialogReg
 import com.example.liga.ui.home.adapters.LeaguesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 @AndroidEntryPoint
@@ -35,10 +37,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         initAdapter()
 
         viewModel.ligsLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
+        }
+
+        btnNavbarHome.setOnClickListener {
+
         }
 
         btnProfileHome.setOnClickListener{
@@ -48,7 +55,6 @@ class HomeFragment : Fragment() {
                 dialog.createDialog()
             }
         }
-
     }
 
     private fun initAdapter() {
