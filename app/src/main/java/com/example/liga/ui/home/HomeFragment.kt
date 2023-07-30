@@ -36,6 +36,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+
         viewModel.ligsLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
         }
@@ -47,6 +48,7 @@ class HomeFragment : Fragment() {
                 dialog.createDialog()
             }
         }
+
     }
 
     private fun initAdapter() {

@@ -24,7 +24,7 @@ class DialogReg(private val fragment: HomeFragment) {
             val pass = dialogElement.etDialogPass.text.toString().trim()
             if (email != null && pass != null) {
                 authProfile.registration(email, pass)
-                alertDialog?.dismiss()
+                close()
             } else {
                 Toast.makeText(
                     fragment.context,
@@ -35,7 +35,14 @@ class DialogReg(private val fragment: HomeFragment) {
         }
 
         dialogElement.btnDialogSign.setOnClickListener {
-            Toast.makeText(fragment.context, "Sign", Toast.LENGTH_SHORT).show()
+            val email = dialogElement.etDialogEmail.text.toString().trim()
+            val pass = dialogElement.etDialogPass.text.toString().trim()
+            authProfile.signIn(email,pass)
+            close()
         }
+    }
+
+    fun close(){
+        alertDialog?.dismiss()
     }
 }
