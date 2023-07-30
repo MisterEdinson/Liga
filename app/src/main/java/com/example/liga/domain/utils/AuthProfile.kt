@@ -19,7 +19,7 @@ class AuthProfile(private val fragment: HomeFragment) {
     fun sendVerificationEmail(user: FirebaseUser){
         user.sendEmailVerification().addOnCompleteListener {
             if(it.isSuccessful){
-                Toast.makeText(fragment.context, "Send email verification you adress!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(fragment.context, "Send email verification you address!", Toast.LENGTH_SHORT).show()
             }else{
                 Toast.makeText(fragment.context, "Send email verification error!", Toast.LENGTH_SHORT).show()
             }
