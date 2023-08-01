@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -14,7 +13,6 @@ import com.example.liga.ui.dialogs.DialogReg
 import com.example.liga.ui.home.adapters.LeaguesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 @AndroidEntryPoint
@@ -48,10 +46,10 @@ class HomeFragment : Fragment() {
 
         }
 
-        btnProfileHome.setOnClickListener{
-            if(mAuth.currentUser?.isEmailVerified != null){
+        btnProfileHome.setOnClickListener {
+            if (mAuth.currentUser?.isEmailVerified != null) {
                 findNavController().navigate(R.id.action_homeFragmentHab_to_profileFragment2)
-            }else{
+            } else {
                 dialog.createDialog()
             }
         }

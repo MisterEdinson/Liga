@@ -1,7 +1,8 @@
 package com.example.liga.domain.utils
 
 import android.widget.Toast
-import com.example.liga.ui.dialogs.DialogReg
+import androidx.navigation.fragment.findNavController
+import com.example.liga.R
 import com.example.liga.ui.home.HomeFragment
 import com.google.firebase.auth.FirebaseUser
 
@@ -41,7 +42,9 @@ class AuthProfile(private val fragment: HomeFragment) {
         if (email.isNotEmpty() && pass.isNotEmpty()) {
             fragment.mAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Toast.makeText(fragment.context, "Ok", Toast.LENGTH_SHORT).show()
+                    fragment.findNavController()
+                        .navigate(R.id.action_homeFragmentHab_to_profileFragment2)
+                    Toast.makeText(fragment.context, "Verification Ok!", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(fragment.context, "Error verification!", Toast.LENGTH_LONG)
                         .show()

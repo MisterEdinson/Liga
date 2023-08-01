@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/homeFragmentHab">
+    app:startDestination="@id/profileFragmentHab">
 
     <fragment
-        android:id="@+id/homeFragmentHab"
+        android:id="@+id/profileFragmentHab"
         android:name="com.example.liga.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
@@ -61,6 +61,6 @@
         tools:layout="@layout/fragment_profile" >
         <action
             android:id="@+id/action_profileFragment2_to_homeFragmentHab"
-            app:destination="@id/homeFragmentHab" />
+            app:destination="@id/profileFragmentHab" />
     </fragment>
 </navigation>
