@@ -1,35 +1,35 @@
 package com.example.liga.ui.team
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
-import com.example.liga.data.network.models.cupsLeagueChampionsTable.TableItem
 import com.example.liga.data.network.models.teams.SquadItem
+import com.example.liga.databinding.FragmentTeamBinding
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_team.*
 
 @AndroidEntryPoint
 class TeamFragment : Fragment() {
 
     private val viewModel by viewModels<TeamViewModel>()
-    private var adapter : TeamInfoAdapter? = null
+    private var adapter: TeamInfoAdapter? = null
+    private lateinit var binding: FragmentTeamBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_team, container, false)
+        binding = FragmentTeamBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,11 +37,11 @@ class TeamFragment : Fragment() {
         val idTeam = arguments?.getInt("code") ?: -1
         viewModel.getTeam(idTeam)
         initAdapter()
-        viewModel.teamInfo.observe(viewLifecycleOwner,Observer{
-            imgLogoTeamFrag.loadImage(it.teamCrest.toString())
-            tvTeamName.text = it.teamName
-            tvCountryTeam.text = it.areaName
-            tvStadiumName.text = it.teamVenue
+        viewModel.teamInfo.observe(viewLifecycleOwner, Observer {
+            binding.imgLogoTeamFrag.loadImage(it.teamCrest.toString())
+            binding.tvTeamName.text = it.teamName
+            binding.tvCountryTeam.text = it.areaName
+            binding.tvStadiumName.text = it.teamVenue
             val gson = Gson()
             val stringTable = it.teamSquad
             val objectTableArray = gson.fromJson(stringTable, Array<SquadItem>::class.java)
@@ -50,9 +50,9 @@ class TeamFragment : Fragment() {
         })
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
         adapter = TeamInfoAdapter()
-        rvTeamFrag.adapter = adapter
+        binding.rvTeamFrag.adapter = adapter
     }
 
     private fun ImageView.loadImage(imgUrl: String) {

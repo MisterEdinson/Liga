@@ -1,7 +1,6 @@
 package com.example.liga.ui.home.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.os.bundleOf
@@ -15,10 +14,13 @@ import coil.load
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.local.models.CompetitonModel
-import kotlinx.android.synthetic.main.item_lig_home.view.*
+import com.example.liga.databinding.ItemLigHomeBinding
 
 class LeaguesAdapter : RecyclerView.Adapter<LeaguesAdapter.LeaguesViewHolder>() {
-    class LeaguesViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    private lateinit var binding: ItemLigHomeBinding
+
+    class LeaguesViewHolder(binding: ItemLigHomeBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val callback = object : DiffUtil.ItemCallback<CompetitonModel>() {
 
@@ -40,29 +42,35 @@ class LeaguesAdapter : RecyclerView.Adapter<LeaguesAdapter.LeaguesViewHolder>() 
     val list = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaguesViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_lig_home, parent, false)
-        return LeaguesViewHolder(view)
+        binding = ItemLigHomeBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return LeaguesViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: LeaguesViewHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-            when(item.idCompetition){
-                2013 -> imgLeague.load(R.drawable.brasil)
-                2018 -> imgLeague.load(R.drawable.logo_euro)
+            when (item.idCompetition) {
+                2013 -> binding.imgLeague.load(R.drawable.brasil)
+                2018 -> binding.imgLeague.load(R.drawable.logo_euro)
                 else -> {
-                    imgLeague.loadImage(item.emblemCompetition.toString())
+                    binding.imgLeague.loadImage(item.emblemCompetition.toString())
                 }
             }
-            imgLeague.setOnClickListener {
+            binding.imgLeague.setOnClickListener {
                 val bundle = bundleOf("code" to item.codeCompetition)
-                if(item.typeCompetition == "LEAGUE"){
+                if (item.typeCompetition == "LEAGUE") {
                     findNavController().navigate(R.id.action_homeFragment_to_ligsFragment, bundle)
-                }else{
-                    when(item.codeCompetition){
-                        "CLI" -> findNavController().navigate(R.id.action_homeFragment_to_cupsFragment, bundle)
-                        "CL" -> findNavController().navigate(R.id.action_homeFragment_to_cupsFragment, bundle)
+                } else {
+                    when (item.codeCompetition) {
+                        "CLI" -> findNavController().navigate(
+                            R.id.action_homeFragment_to_cupsFragment,
+                            bundle
+                        )
+
+                        "CL" -> findNavController().navigate(
+                            R.id.action_homeFragment_to_cupsFragment,
+                            bundle
+                        )
                     }
                 }
             }

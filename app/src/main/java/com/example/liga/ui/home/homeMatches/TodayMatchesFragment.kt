@@ -8,30 +8,27 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.liga.R
-import com.example.liga.data.network.models.matches.MatchesItem
+import com.example.liga.databinding.FragmentTodayMatchesBinding
 import com.example.liga.ui.home.HomeViewModel
 import com.example.liga.ui.home.adapters.MatchDayAdapter
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_today_matches.*
 
 @AndroidEntryPoint
 class TodayMatchesFragment : Fragment() {
 
     val viewModel: HomeViewModel by activityViewModels()
     var adapter: MatchDayAdapter? = null
+    private lateinit var binding: FragmentTodayMatchesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_today_matches, container, false)
-        return view
+        binding = FragmentTodayMatchesBinding.inflate(layoutInflater)
+//        val view = inflater.inflate(R.layout.fragment_today_matches, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,14 +37,14 @@ class TodayMatchesFragment : Fragment() {
         viewModel.getMatchDay()
         viewModel.matchDayLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
-            pbMatchToDay.visibility = View.INVISIBLE
-            if(it.isEmpty()){
-                tvTodayMatchesNone.visibility = View.VISIBLE
-            }else{
-                tvTodayMatchesNone.visibility = View.GONE
+            binding.pbMatchToDay.visibility = View.INVISIBLE
+            if (it.isEmpty()) {
+                binding.tvTodayMatchesNone.visibility = View.VISIBLE
+            } else {
+                binding.tvTodayMatchesNone.visibility = View.GONE
             }
         }
-        rvHomeDayMatch.setOnTouchListener(object : SwipeHome(view.context) {
+        binding.rvHomeDayMatch.setOnTouchListener(object : SwipeHome(view.context) {
             override fun onSwipeRight() {
                 findNavController().navigate(R.id.action_todayMatchesFragment_to_immediateMatchesFragment)
                 Toast.makeText(
@@ -57,15 +54,15 @@ class TodayMatchesFragment : Fragment() {
                 ).show()
             }
         })
-        tvLabelMatchDayHome.setOnClickListener{
+        binding.tvLabelMatchDayHome.setOnClickListener {
             val bundle = bundleOf("code" to 4289)
-            findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment,bundle)
+            findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment, bundle)
         }
     }
 
     private fun initAdapter() {
         adapter = MatchDayAdapter()
-        rvHomeDayMatch.adapter = adapter
+        binding.rvHomeDayMatch.adapter = adapter
     }
 }
 

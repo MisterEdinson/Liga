@@ -9,15 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.liga.R
-import com.example.liga.domain.utils.Constants.Companion.IMMEDIATE_DAY
-import com.example.liga.domain.utils.TimeConverter
+import com.example.liga.databinding.FragmentImmediateMatchesBinding
 import com.example.liga.ui.home.HomeViewModel
 import com.example.liga.ui.home.adapters.ImmediateMatchAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_immediate_matches.*
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 @AndroidEntryPoint
@@ -25,13 +20,16 @@ class ImmediateMatchesFragment : Fragment() {
 
     private val viewModel: HomeViewModel by activityViewModels()
     private var adapter: ImmediateMatchAdapter? = null
+    private lateinit var binding: FragmentImmediateMatchesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         viewModel.getImmediateDay()
-        return inflater.inflate(R.layout.fragment_immediate_matches, container, false)
+        //return inflater.inflate(R.layout.fragment_immediate_matches, container, false)
+        binding = FragmentImmediateMatchesBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,12 +37,12 @@ class ImmediateMatchesFragment : Fragment() {
         initAdapter()
         viewModel.matchImmediateLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
-            if(it.isNotEmpty()){
-                pbMatchImmediate.visibility = View.INVISIBLE
+            if (it.isNotEmpty()) {
+                binding.pbMatchImmediate.visibility = View.INVISIBLE
             }
         }
 
-        rvHomeImmediateMatch.setOnTouchListener(object : SwipeHome(view.context) {
+        binding.rvHomeImmediateMatch.setOnTouchListener(object : SwipeHome(view.context) {
             override fun onSwipeLeft() {
                 findNavController().navigate(R.id.action_immediateMatchesFragment_to_todayMatchesFragment)
                 Toast.makeText(
@@ -58,6 +56,6 @@ class ImmediateMatchesFragment : Fragment() {
 
     fun initAdapter() {
         adapter = ImmediateMatchAdapter()
-        rvHomeImmediateMatch.adapter = adapter
+        binding.rvHomeImmediateMatch.adapter = adapter
     }
 }

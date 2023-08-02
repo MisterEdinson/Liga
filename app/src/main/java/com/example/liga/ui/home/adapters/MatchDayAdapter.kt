@@ -1,7 +1,6 @@
 package com.example.liga.ui.home.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -12,14 +11,15 @@ import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.local.models.MatchesModel
-import com.example.liga.data.network.models.matches.MatchesItem
+import com.example.liga.databinding.ItemMatchBinding
 import com.example.liga.domain.utils.TimeConverter
-import kotlinx.android.synthetic.main.item_match.view.*
 
 
 class MatchDayAdapter : RecyclerView.Adapter<MatchDayAdapter.MatchDayHolder>() {
 
-    class MatchDayHolder(view: View) : RecyclerView.ViewHolder(view)
+    private lateinit var binding: ItemMatchBinding
+
+    class MatchDayHolder(binding: ItemMatchBinding) : RecyclerView.ViewHolder(binding.root)
 
     private val callback = object : DiffUtil.ItemCallback<MatchesModel>() {
         override fun areItemsTheSame(oldItem: MatchesModel, newItem: MatchesModel): Boolean {
@@ -37,26 +37,26 @@ class MatchDayAdapter : RecyclerView.Adapter<MatchDayAdapter.MatchDayHolder>() {
     val list = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchDayHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_match, parent, false)
-        return MatchDayHolder(view)
+        binding = ItemMatchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MatchDayHolder(binding)
     }
 
     override fun onBindViewHolder(holder: MatchDayHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-            imHomeTeam.loadImage(item.crestHomeTeam.toString())
-            imGuestTeam.loadImage(item.crestAwayTeam.toString())
-            tvHomeTeam.text = item.nameHomeTeam
-            tvGuestTeam.text = item.nameAwayTeam
-            tvStatusMatch.text = item.statusMatch
+            binding.imHomeTeam.loadImage(item.crestHomeTeam.toString())
+            binding.imGuestTeam.loadImage(item.crestAwayTeam.toString())
+            binding.tvHomeTeam.text = item.nameHomeTeam
+            binding.tvGuestTeam.text = item.nameAwayTeam
+            binding.tvStatusMatch.text = item.statusMatch
 
             val time = TimeConverter().dateConverterToTime(item.utcDateMatch)
-            if(item.statusMatch == "TIMED"){
-                tvTotalMatch.text = time
+            if (item.statusMatch == "TIMED") {
+                binding.tvTotalMatch.text = time
             }
-            if(item.statusMatch == "FINISHED"){
-                tvTotalMatch.text = "${item.fullTimeHomeScore}:${item.fullTimeAwayScore}"
-                tvTotalMatch.typeface.isBold
+            if (item.statusMatch == "FINISHED") {
+                binding.tvTotalMatch.text = "${item.fullTimeHomeScore}:${item.fullTimeAwayScore}"
+                binding.tvTotalMatch.typeface.isBold
             }
         }
     }

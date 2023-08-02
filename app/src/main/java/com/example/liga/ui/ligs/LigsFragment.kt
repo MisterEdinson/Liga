@@ -12,21 +12,22 @@ import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.network.models.leagueTable.TableItem
+import com.example.liga.databinding.FragmentLigsBinding
 import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_ligs.*
 
 @AndroidEntryPoint
 class LigsFragment : Fragment() {
 
     private val viewModel by viewModels<LeagueViewModel>()
     private var adapter: LeagueTableAdapter? = null
-
+    private lateinit var binding: FragmentLigsBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_ligs, container, false)
+        binding = FragmentLigsBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,13 +36,13 @@ class LigsFragment : Fragment() {
         initAdapter()
         viewModel.getTableChampionship(code)
         viewModel.getChampionship.observe(viewLifecycleOwner) {
-            tvLeagueCountry.text = it.areaName
-            imgLeagueLogo.loadImage(it.competitionEmblem.toString())
-            imgLeagueFlag.loadImage(it.areaFlag.toString())
-            tvLeagueName.text = it.competitionName
-            tvLeagueGameDay.text = it.seasonCurrentMatchday.toString()
-            tvLeagueStartDate.text = it.seasonStart
-            tvLeagueDateEnd.text = it.seasonEnd
+            binding.tvLeagueCountry.text = it.areaName
+            binding.imgLeagueLogo.loadImage(it.competitionEmblem.toString())
+            binding.imgLeagueFlag.loadImage(it.areaFlag.toString())
+            binding.tvLeagueName.text = it.competitionName
+            binding.tvLeagueGameDay.text = it.seasonCurrentMatchday.toString()
+            binding.tvLeagueStartDate.text = it.seasonStart
+            binding.tvLeagueDateEnd.text = it.seasonEnd
 
             val gson = Gson()
             val stringTable = it.table
@@ -52,7 +53,7 @@ class LigsFragment : Fragment() {
 
     private fun initAdapter() {
         adapter = LeagueTableAdapter()
-        rvLeagueTable.adapter = adapter
+        binding.rvLeagueTable.adapter = adapter
     }
 
     private fun ImageView.loadImage(imgUrl: String) {

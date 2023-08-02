@@ -13,7 +13,6 @@ import com.example.liga.ui.dialogs.DialogReg
 import com.example.liga.ui.home.adapters.LeaguesAdapter
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_home.*
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -37,16 +36,15 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initAdapter()
-
         viewModel.ligsLiveData.observe(viewLifecycleOwner) {
             adapter?.list?.submitList(it)
         }
 
-        btnNavbarHome.setOnClickListener {
+        _binding.btnNavbarHome.setOnClickListener {
 
         }
 
-        btnProfileHome.setOnClickListener {
+        _binding.btnProfileHome.setOnClickListener {
             if (mAuth.currentUser?.isEmailVerified != null) {
                 findNavController().navigate(R.id.action_homeFragmentHab_to_profileFragment2)
             } else {
