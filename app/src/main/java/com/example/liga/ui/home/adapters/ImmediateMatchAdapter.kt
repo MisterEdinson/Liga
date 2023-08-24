@@ -1,12 +1,10 @@
 package com.example.liga.ui.home.adapters
 
-import android.app.ActionBar.LayoutParams
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.os.bundleOf
-import androidx.core.view.marginTop
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -16,10 +14,12 @@ import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.local.models.MatchesModel
+import com.example.liga.databinding.ItemMatchBinding
 import com.example.liga.domain.utils.TimeConverter
-import kotlinx.android.synthetic.main.item_match.view.*
 
 class ImmediateMatchAdapter : RecyclerView.Adapter<ImmediateMatchAdapter.ImmediateHoleder>() {
+
+    private lateinit var binding: ItemMatchBinding
 
     private val callback = object : DiffUtil.ItemCallback<MatchesModel>() {
         override fun areItemsTheSame(oldItem: MatchesModel, newItem: MatchesModel): Boolean {
@@ -33,53 +33,58 @@ class ImmediateMatchAdapter : RecyclerView.Adapter<ImmediateMatchAdapter.Immedia
 
     val list = AsyncListDiffer(this, callback)
 
-    class ImmediateHoleder(view: View) : RecyclerView.ViewHolder(view)
+    class ImmediateHoleder(binding: ItemMatchBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImmediateHoleder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_match, parent, false)
-        return ImmediateHoleder(view)
+        binding = ItemMatchBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ImmediateHoleder(binding)
     }
 
     override fun onBindViewHolder(holder: ImmediateHoleder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
             if (item.crestHomeTeam?.isNotEmpty() == true) {
-                imHomeTeam.loadImage(item.crestHomeTeam.toString())
+                binding.imHomeTeam.loadImage(item.crestHomeTeam.toString())
             } else {
-                imHomeTeam.loadImage(item.emblemCompetition.toString())
+                binding.imHomeTeam.loadImage(item.emblemCompetition.toString())
             }
-            tvHomeTeam.text = item.nameHomeTeam
+            binding.tvHomeTeam.text = item.nameHomeTeam
 
-            tvStatusMatch.text = item.statusMatch
+            binding.tvStatusMatch.text = item.statusMatch
 //            val time = TimeConverter().dateConverterToTime(item.utcDateMatch)
 
-            when(item.statusMatch){
-                "TIMED" ->  {
-                    tvTotalMatch.text = TimeConverter().getConvertRecycler(item.utcDateMatch)
+            when (item.statusMatch) {
+                "TIMED" -> {
+                    binding.tvTotalMatch.text =
+                        TimeConverter().getConvertRecycler(item.utcDateMatch)
                 }
-                "FINISHED" -> tvTotalMatch.text = "${item.fullTimeHomeScore}:${item.fullTimeAwayScore}"
+
+                "FINISHED" -> binding.tvTotalMatch.text =
+                    "${item.fullTimeHomeScore}:${item.fullTimeAwayScore}"
+
                 "POSTPONED" -> {
-                    tvTotalMatch.visibility = View.GONE
-                    val layoutParam = tvStatusMatch.layoutParams as ViewGroup.MarginLayoutParams
+                    binding.tvTotalMatch.visibility = View.GONE
+                    val layoutParam =
+                        binding.tvStatusMatch.layoutParams as ViewGroup.MarginLayoutParams
                     layoutParam.topMargin = 0
-                    tvStatusMatch.layoutParams
+                    binding.tvStatusMatch.layoutParams
                 }
             }
 
             if (item.crestAwayTeam?.isNotEmpty() == true) {
-                imGuestTeam.loadImage(item.crestAwayTeam.toString())
+                binding.imGuestTeam.loadImage(item.crestAwayTeam.toString())
             } else {
-                imGuestTeam.loadImage(item.emblemCompetition.toString())
+                binding.imGuestTeam.loadImage(item.emblemCompetition.toString())
             }
-            tvGuestTeam.text = item.nameAwayTeam
+            binding.tvGuestTeam.text = item.nameAwayTeam
 
-            tvHomeTeam.setOnClickListener {
+            binding.tvHomeTeam.setOnClickListener {
                 val bundle = bundleOf("code" to item.idHomeTeam)
-                findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment,bundle)
+                findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment, bundle)
             }
-            tvGuestTeam.setOnClickListener {
+            binding.tvGuestTeam.setOnClickListener {
                 val bundle = bundleOf("code" to item.idAwayTeam)
-                findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment,bundle)
+                findNavController().navigate(R.id.action_homeFragmentHab_to_teamFragment, bundle)
             }
         }
     }

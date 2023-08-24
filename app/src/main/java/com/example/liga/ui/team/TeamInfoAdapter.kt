@@ -1,18 +1,17 @@
 package com.example.liga.ui.team
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.liga.R
 import com.example.liga.data.network.models.teams.SquadItem
-import kotlinx.android.synthetic.main.item_team.view.*
+import com.example.liga.databinding.ItemTeamBinding
 
-class TeamInfoAdapter:RecyclerView.Adapter<TeamInfoAdapter.TeamViewHolder>() {
+class TeamInfoAdapter : RecyclerView.Adapter<TeamInfoAdapter.TeamViewHolder>() {
+    private lateinit var binding: ItemTeamBinding
 
-    private val callback = object : DiffUtil.ItemCallback<SquadItem>(){
+    private val callback = object : DiffUtil.ItemCallback<SquadItem>() {
         override fun areItemsTheSame(oldItem: SquadItem, newItem: SquadItem): Boolean {
             return oldItem.id == newItem.id
         }
@@ -25,17 +24,17 @@ class TeamInfoAdapter:RecyclerView.Adapter<TeamInfoAdapter.TeamViewHolder>() {
     val list = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_team, parent, false)
-        return TeamViewHolder(view)
+        binding = ItemTeamBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TeamViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-            tvPositionPlayer.text = positionPlay(item.position.toString())
-            tvNamePlayer.text = item.name
-            tvBirdtsdayPlayer.text = item.dateOfBirth
-            tvCountryPlayer.text = item.nationality
+            binding.tvPositionPlayer.text = positionPlay(item.position.toString())
+            binding.tvNamePlayer.text = item.name
+            binding.tvBirdtsdayPlayer.text = item.dateOfBirth
+            binding.tvCountryPlayer.text = item.nationality
         }
     }
 
@@ -44,7 +43,7 @@ class TeamInfoAdapter:RecyclerView.Adapter<TeamInfoAdapter.TeamViewHolder>() {
     }
 
     fun positionPlay(pos: String): String {
-        return when(pos){
+        return when (pos) {
             "Goalkeeper" -> "GK"
             "Defence" -> "DF"
             "Midfield" -> "MD"
@@ -53,5 +52,6 @@ class TeamInfoAdapter:RecyclerView.Adapter<TeamInfoAdapter.TeamViewHolder>() {
         }
     }
 
-    class TeamViewHolder(view:View): RecyclerView.ViewHolder(view)
+    class TeamViewHolder(private val binding: ItemTeamBinding) :
+        RecyclerView.ViewHolder(binding.root)
 }

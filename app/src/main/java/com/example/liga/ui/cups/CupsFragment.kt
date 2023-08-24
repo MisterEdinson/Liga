@@ -12,20 +12,21 @@ import coil.ImageLoader
 import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
+import com.example.liga.databinding.FragmentCupsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_cups.*
 
 @AndroidEntryPoint
 class CupsFragment : Fragment() {
 
     private val viewModel by viewModels<CupsViewModel>()
     private var adapter: CupTableAdapter? = null
-
+    private lateinit var binding: FragmentCupsBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_cups, container, false)
+        binding = FragmentCupsBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,23 +36,24 @@ class CupsFragment : Fragment() {
         viewModel.getCupsInfo(code)
         viewModel.getCupsTable(code)
         viewModel.cupsInfo.observe(viewLifecycleOwner) {
-            tvSeasonCup.text = it.season
-            tvWinnerCup.text = it.winnerName
-            tvStartCup.text = it.seasonStart
-            tvEndCup.text = it.seasonEnd
-            tvNameCup.text = it.competitionName
-            imgLogoCup.loadImage(it.competitionEmblem.toString())
+            binding.tvSeasonCup.text = it.season
+            binding.tvWinnerCup.text = it.winnerName
+            binding.tvStartCup.text = it.seasonStart
+            binding.tvEndCup.text = it.seasonEnd
+            binding.tvNameCup.text = it.competitionName
+            binding.imgLogoCup.loadImage(it.competitionEmblem.toString())
         }
-        viewModel.cupsTable.observe(viewLifecycleOwner, Observer{
+        viewModel.cupsTable.observe(viewLifecycleOwner, Observer {
             adapter?.list?.submitList(it)
         })
-        if(code == "CLI"){
-            cupsFragment.setBackgroundResource(R.drawable.bg_cup_lib)
+        if (code == "CLI") {
+            binding.cupsFragment.setBackgroundResource(R.drawable.bg_cup_lib)
         }
     }
-    private fun initAdapter(){
+
+    private fun initAdapter() {
         adapter = CupTableAdapter()
-        rvCupTable.adapter = adapter
+        binding.rvCupTable.adapter = adapter
     }
 
     private fun ImageView.loadImage(imgUrl: String) {

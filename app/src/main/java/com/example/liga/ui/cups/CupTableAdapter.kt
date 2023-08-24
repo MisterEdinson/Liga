@@ -1,7 +1,6 @@
 package com.example.liga.ui.cups
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -9,20 +8,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.ImageLoader
 import coil.decode.SvgDecoder
-import coil.loadAny
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.local.models.LeagueChampGsonModel
 import com.example.liga.data.network.models.cupsLeagueChampionsTable.TableItem
+import com.example.liga.databinding.ItemCupGroupBinding
+import com.example.liga.databinding.ItemCupTableBinding
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import kotlinx.android.synthetic.main.item_cup_group.view.*
-import kotlinx.android.synthetic.main.item_cup_table.view.*
-import kotlinx.android.synthetic.main.item_league_table.view.*
-import kotlinx.android.synthetic.main.item_test.view.*
 
 class CupTableAdapter : RecyclerView.Adapter<CupTableAdapter.CupViewHolder>() {
-    class CupViewHolder(view: View) : RecyclerView.ViewHolder(view)
+
+    private lateinit var binding: ItemCupTableBinding
+
+    class CupViewHolder(binding: ItemCupTableBinding) : RecyclerView.ViewHolder(binding.root)
 
     val callback = object : DiffUtil.ItemCallback<LeagueChampGsonModel>() {
         override fun areItemsTheSame(
@@ -43,9 +41,8 @@ class CupTableAdapter : RecyclerView.Adapter<CupTableAdapter.CupViewHolder>() {
     val list = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CupViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_cup_table, parent, false)
-        return CupViewHolder(view)
+        binding = ItemCupTableBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CupViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: CupViewHolder, position: Int) {
@@ -57,10 +54,10 @@ class CupTableAdapter : RecyclerView.Adapter<CupTableAdapter.CupViewHolder>() {
         val objectTableList = objectTableArray.toList()
 
         holder.itemView.apply {
-            tvGroupTable.text = item.standingsGroup
+            binding.tvGroupTable.text = item.standingsGroup
             // место для вставки вложенного recyclerView
             val nestedAdapter = NestedTableAdapter(objectTableList)
-            recyclerViewNested.adapter = nestedAdapter
+            binding.recyclerViewNested.adapter = nestedAdapter
         }
 
     }
@@ -69,30 +66,30 @@ class CupTableAdapter : RecyclerView.Adapter<CupTableAdapter.CupViewHolder>() {
         return list.currentList.size
     }
 }
+
 class NestedTableAdapter(
     private val tableList: List<TableItem>
-    ) : RecyclerView.Adapter<NestedTableAdapter.TableViewHolder>() {
-    class TableViewHolder(view: View) : RecyclerView.ViewHolder(view)
+) : RecyclerView.Adapter<NestedTableAdapter.TableViewHolder>() {
+    private lateinit var binding: ItemCupGroupBinding
+
+    class TableViewHolder(binding: ItemCupGroupBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TableViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(
-            R.layout.item_cup_group,
-            parent,
-            false)
-        return TableViewHolder(view)
+        binding = ItemCupGroupBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TableViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TableViewHolder, position: Int) {
         val tableItem = tableList[position]
         holder.itemView.apply {
-            tvPositionTeamTable.text = tableItem.position.toString()
-            tvNameTeamTable.text = tableItem.team?.shortName
-            imgTeamTable.loadImage(tableItem.team?.crest.toString())
-            tvGameCountTeamTable.text = tableItem.playedGames.toString()
-            tvPointTeamTable.text = tableItem.points.toString()
-            tvGameDrawTeamTable.text = tableItem.draw.toString()
-            tvGameLostTeamTable.text = tableItem.lost.toString()
-            tvGameWinTeamTable.text = tableItem.won.toString()
+            binding.tvPositionTeamTable.text = tableItem.position.toString()
+            binding.tvNameTeamTable.text = tableItem.team?.shortName
+            binding.imgTeamTable.loadImage(tableItem.team?.crest.toString())
+            binding.tvGameCountTeamTable.text = tableItem.playedGames.toString()
+            binding.tvPointTeamTable.text = tableItem.points.toString()
+            binding.tvGameDrawTeamTable.text = tableItem.draw.toString()
+            binding.tvGameLostTeamTable.text = tableItem.lost.toString()
+            binding.tvGameWinTeamTable.text = tableItem.won.toString()
         }
     }
 

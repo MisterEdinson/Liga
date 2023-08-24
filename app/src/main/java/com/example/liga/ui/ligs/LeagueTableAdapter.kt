@@ -1,11 +1,8 @@
 package com.example.liga.ui.ligs
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -14,14 +11,14 @@ import coil.decode.SvgDecoder
 import coil.request.ImageRequest
 import com.example.liga.R
 import com.example.liga.data.network.models.leagueTable.TableItem
-import kotlinx.android.synthetic.main.item_league_table.view.*
-import kotlinx.android.synthetic.main.item_lig_home.view.*
+import com.example.liga.databinding.ItemLeagueTableBinding
 
 class LeagueTableAdapter : RecyclerView.Adapter<LeagueTableAdapter.TableViewHolder>() {
+    private lateinit var binding: ItemLeagueTableBinding
 
-    class TableViewHolder(view: View) : RecyclerView.ViewHolder(view)
+    class TableViewHolder(binding: ItemLeagueTableBinding) : RecyclerView.ViewHolder(binding.root)
 
-    private val callback = object : DiffUtil.ItemCallback<TableItem>(){
+    private val callback = object : DiffUtil.ItemCallback<TableItem>() {
         override fun areItemsTheSame(
             oldItem: TableItem,
             newItem: TableItem
@@ -40,23 +37,23 @@ class LeagueTableAdapter : RecyclerView.Adapter<LeagueTableAdapter.TableViewHold
     val list = AsyncListDiffer(this, callback)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TableViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_league_table,parent,false)
-        return TableViewHolder(view)
+        binding = ItemLeagueTableBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return TableViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: TableViewHolder, position: Int) {
         val item = list.currentList[position]
         holder.itemView.apply {
-            imgTeamLeague.loadImage(item.team?.crest.toString())
-            tvNameTeamLeague.text = item.team?.name
-            tvPositionTeamLeague.text = item.position.toString()
-            tvMatchesCountLeague.text = item.playedGames.toString()
-            tvPointCountLeague.text = item.points.toString()
+            binding.imgTeamLeague.loadImage(item.team?.crest.toString())
+            binding.tvNameTeamLeague.text = item.team?.name
+            binding.tvPositionTeamLeague.text = item.position.toString()
+            binding.tvMatchesCountLeague.text = item.playedGames.toString()
+            binding.tvPointCountLeague.text = item.points.toString()
 
-            item_id_team.setOnClickListener {
-                val bundle = bundleOf("code" to item.team?.id)
-                findNavController().navigate(R.id.action_ligsFragment_to_teamFragment,bundle)
-            }
+//            binding.item_id_team.setOnClickListener {
+//                val bundle = bundleOf("code" to item.team?.id)
+//                findNavController().navigate(R.id.action_ligsFragment_to_teamFragment,bundle)
+//            }
         }
     }
 
